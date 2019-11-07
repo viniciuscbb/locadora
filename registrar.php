@@ -49,12 +49,20 @@
                         <div class="login-form">
                             <form action="" method="post">
                                 <div class="form-group">
-                                    <label>Username</label>
-                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Username">
+                                    <label>Nome</label>
+                                    <input class="au-input au-input--full" type="text" name="username" placeholder="Nome completo">
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address</label>
                                     <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Endereço</label>
+                                    <input class="au-input au-input--full" type="adress" name="endereco" placeholder="Endereço onde mora">
+                                </div>
+                                <div class="form-group">
+                                    <label>CPF</label>
+                                    <input class="au-input au-input--full" type="number" name="endereco" placeholder="Endereço onde mora">
                                 </div>
                                 <div class="form-group">
                                     <label>Password</label>
