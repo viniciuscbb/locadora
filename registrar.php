@@ -53,8 +53,8 @@
                                     <input class="au-input au-input--full" type="text" name="username" placeholder="Nome completo">
                                 </div>
                                 <div class="form-group">
-                                    <label>Email Address</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Email">
+                                    <label>E-mail</label>
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Endereço do e-mail">
                                 </div>
                                 <div class="form-group">
                                     <label>Endereço</label>
@@ -62,11 +62,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>CPF</label>
-                                    <input class="au-input au-input--full" type="number" name="endereco" placeholder="Endereço onde mora">
+                                    <input class="au-input au-input--full" type="number" name="cpf" placeholder="Somente números">
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                    <label>Data de nascimento</label>
+                                    <input class="au-input au-input--full" type="date" name="data_nascimento" placeholder="">
+                                </div>
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Senha">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -74,12 +78,6 @@
                                     </label>
                                 </div>
                                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
-                                <div class="social-login-content">
-                                    <div class="social-button">
-                                        <button class="au-btn au-btn--block au-btn--blue m-b-20">register with facebook</button>
-                                        <button class="au-btn au-btn--block au-btn--blue2">register with twitter</button>
-                                    </div>
-                                </div>
                             </form>
                             <div class="register-link">
                                 <p>
