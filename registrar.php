@@ -10,7 +10,7 @@
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Register</title>
+    <title>Registro</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -74,15 +74,15 @@
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
-                                        <input type="checkbox" name="aggree">Agree the terms and policy
+                                        <input type="checkbox" name="aggree">Concorde com os termos e a política
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar</button>
                             </form>
                             <div class="register-link">
                                 <p>
-                                    Already have account?
-                                    <a href="#">Sign In</a>
+                                    Já possui uma conta?
+                                    <a href="#">Entre aqui</a>
                                 </p>
                             </div>
                         </div>
