@@ -99,7 +99,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
                                             <a href="conta.php">
-                                                <i class="zmdi zmdi-account"></i>Conta</a>
+                                                <i class="zmdi zmdi-account"></i>Seus dados</a>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
@@ -125,7 +125,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <span class="au-breadcrumb-span">Você está aqui:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Página inicial</a>
+                                            <a href="#">Inicio</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
