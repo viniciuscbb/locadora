@@ -1,3 +1,14 @@
+<?php
+
+$data_inicial =  date('Y-m-d');
+$data_final = "2019-11-15";
+$time_inicial = strtotime($data_inicial);
+$time_final = strtotime($data_final);
+$diferenca = $time_final - $time_inicial; 
+$dias = (int)floor( $diferenca / (60 * 60 * 24)); 
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
