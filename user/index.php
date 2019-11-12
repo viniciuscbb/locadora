@@ -98,7 +98,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="#">
+                                            <a href="conta.php">
                                                 <i class="zmdi zmdi-account"></i>Conta</a>
                                         </div>
                                     </div>
