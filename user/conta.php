@@ -185,8 +185,7 @@
                                                     <label for="email-input" class=" form-control-label">Data de nascimento</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                <input type="text" name="cpf-input" placeholder="Data" disabled="" class="form-control">
-                                                    
+                                                    <input type="text" name="cpf-input" placeholder="Data" disabled="" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
