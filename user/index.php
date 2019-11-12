@@ -60,7 +60,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="index.php">
+                                <a href="#">
                                     <i class="fas fa-tachometer-alt"></i>Painel
                                     <span class="bot-line"></span>
                                 </a>

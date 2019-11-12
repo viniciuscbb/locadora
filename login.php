@@ -50,7 +50,7 @@
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Endereço do E-mail">
+                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Endereço do e-mail">
                                 </div>
                                 <div class="form-group">
                                     <label>Senha</label>
