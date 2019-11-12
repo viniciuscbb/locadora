@@ -69,7 +69,7 @@
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">User name</a>
+                                    <a class="js-acc-btn" href="#">Nome do usuário</a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -80,20 +80,20 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#">User Name</a>
+                                                <a href="#">Nome do usuário</a>
                                             </h5>
-                                            <span class="email">user@email.com</span>
+                                            <span class="email">e-mail</span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
                                             <a href="#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
+                                                <i class="zmdi zmdi-account"></i>Conta</a>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
                                         <a href="#">
-                                            <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <i class="zmdi zmdi-power"></i>Sair</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                     <span class="au-breadcrumb-span">Você está aqui:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Home</a>
+                                            <a href="#">Página inicial</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -135,8 +135,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Welcome back
-                                <span>User!</span>
+                            <h1 class="title-4">Seja bem vindo,
+                                <span>usuário!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -149,7 +149,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="title-5 m-b-35">data table</h3>
+                            <h3 class="title-5 m-b-35">Tabela de dados</h3>
                             
                             <div class="table-responsive table-responsive-data2">
                                 <table class="table table-data2">
@@ -180,7 +180,7 @@
                                             <td>1 Dia(s)</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Adiar contrato?????">
+                                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Adiar contrato">
                                                         <i class="zmdi zmdi-edit"></i>
                                                     </button>
                                                     <button class="item" data-toggle="tooltip" data-placement="top" title="Finalizar contrato">
@@ -207,7 +207,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</p>
                             </div>
                         </div>
                     </div>
