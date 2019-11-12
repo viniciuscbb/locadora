@@ -156,8 +156,43 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
             </section>
             <!-- END WELCOME-->
             <!-- DATA TABLE-->
+            <section class="statistic statistic2">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--orange">
+                                <h2 class="number">5</h2>
+                                <span class="desc">total de alugueis</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-shopping-cart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--blue">
+                                <h2 class="number">1</h2>
+                                <span class="desc">contrato em aberto</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-calendar-note"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            <div class="statistic__item statistic__item--red">
+                                <h2 class="number">R$60,80</h2>
+                                <span class="desc">total em multas</span>
+                                <div class="icon">
+                                    <i class="zmdi zmdi-money"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
             <section class="p-t-20">
                 <div class="container">
+                    
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="title-5 m-b-35">Tabela de dados</h3>
