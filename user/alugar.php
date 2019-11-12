@@ -182,13 +182,13 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                             
                                             <td>Argo</td>
                                             <td>1.0</td>
-                                            <td>Manual</td>
+                                            <td class="desc">Manual</td>
                                             <td>
                                               <span class="status--process">Sim</span>
                                             </td>
                                             <td>5</td>
                                             <td>4</td>
-                                            <td>Assistida</td>
+                                            <td><span class="block-email">Assistida</span></td>
                                             <td>R$130/dia</td>
                                             <td>
                                                 <div class="table-data-feature">
