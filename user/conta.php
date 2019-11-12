@@ -69,7 +69,7 @@
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">User name</a>
+                                    <a class="js-acc-btn" href="#">Nome do Usuário</a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -80,20 +80,20 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#">User Name</a>
+                                                <a href="index.php">Nome do Usuário</a>
                                             </h5>
-                                            <span class="email">user@email.com</span>
+                                            <span class="email">e-mail</span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
                                             <a href="#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
+                                                <i class="zmdi zmdi-account"></i>Seus dados</a>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
                                         <a href="#">
-                                            <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <i class="zmdi zmdi-power"></i>Sair</a>
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +114,7 @@
                                     <span class="au-breadcrumb-span">Você está aqui:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Home</a>
+                                            <a href="#">Inicio</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -135,8 +135,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Welcome back
-                                <span>User!</span>
+                            <h1 class="title-4">Seja bem vindo,
+                                <span>usuário!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -151,7 +151,7 @@
                         <div class="col-md-12">
                         <div class="card">
                                     <div class="card-header">
-                                        <strong>Edite</strong> seus Dados
+                                        <strong>Edite seus dados </strong>
                                     </div>
                                     <div class="card-body card-block">
                                         <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
@@ -168,8 +168,7 @@
                                                     <label for="email-input" class=" form-control-label">Endereço</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="text" name="adress-input" placeholder="Endereço" class="form-control">
-                                                    <small class="help-block form-text">Please enter your email</small>
+                                                    <input type="text" name="adress-input" placeholder="Insira aqui seu novo endereço" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -190,11 +189,10 @@
                                             </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3">
-                                                    <label for="email-input" class=" form-control-label">Email Input</label>
+                                                    <label for="email-input" class=" form-control-label">E-mail</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="email" id="email-input" name="email-input" placeholder="Enter Email" class="form-control">
-                                                    <small class="help-block form-text">Please enter your email</small>
+                                                    <input type="email" id="email-input" name="email-input" placeholder="Insira aqui seu novo e-mail" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -202,8 +200,7 @@
                                                     <label for="password-input" class=" form-control-label">Password</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="password" id="password-input" name="password-input" placeholder="Password" class="form-control">
-                                                    <small class="help-block form-text">Please enter a complex password</small>
+                                                    <input type="password" id="password-input" name="password-input" placeholder="Insira aqui sua nova senha" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="row form-group">
@@ -211,16 +208,15 @@
                                                     <label for="password-input" class=" form-control-label">Password</label>
                                                 </div>
                                                 <div class="col-12 col-md-9">
-                                                    <input type="password" id="password-input" name="password-input" placeholder="Password" class="form-control">
-                                                    <small class="help-block form-text">Please enter a complex password</small>
+                                                    <input type="password" id="password-input" name="password-input" placeholder="Repita a senha" class="form-control">
                                                 </div>
                                             </div>
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary btn-sm">
-                                            <i class="fa fa-dot-circle-o"></i> Submit
+                                            <i class="fa fa-dot-circle-o"></i> Salvar
                                         </button>
                                         <button type="reset" class="btn btn-danger btn-sm">
-                                            <i class="fa fa-ban"></i> Reset
+                                            <i class="fa fa-ban"></i> Cancelar
                                         </button>
                                     </div>
                                 </div>
@@ -236,7 +232,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</a>.</p>
                             </div>
                         </div>
                     </div>
