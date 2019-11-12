@@ -67,7 +67,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                 
                             </li>
                             <li>
-                                <a href="alugar.php">
+                                <a href="#">
                                     <i class="fas fa-shopping-basket"></i>
                                     <span class="bot-line"></span>Aluguel</a>
                             </li>
