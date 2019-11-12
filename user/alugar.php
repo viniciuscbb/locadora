@@ -53,14 +53,14 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <div class="header__logo">
-                        <a href="#">
+                        <a href="index.php">
                             <img src="../images/icon/logo-white.png" alt="CoolAdmin" />
                         </a>
                     </div>
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="#">
+                                <a href="index.php">
                                     <i class="fas fa-tachometer-alt"></i>Painel
                                     <span class="bot-line"></span>
                                 </a>
@@ -125,7 +125,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <span class="au-breadcrumb-span">Você está aqui:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Página inicial</a>
+                                            <a href="index.php">Inicio</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -165,7 +165,6 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                 <table class="table table-data2">
                                     <thead>
                                         <tr>
-                                            
                                             <th>modelo</th>
                                             <th>motor</th>
                                             <th>cambio</th>
