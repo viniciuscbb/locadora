@@ -103,7 +103,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
-                                        <a href="#">
+                                        <a href="sair.php">
                                             <i class="zmdi zmdi-power"></i>Sair</a>
                                     </div>
                                 </div>

@@ -92,7 +92,7 @@
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
-                                        <a href="#">
+                                        <a href="sair.php">
                                             <i class="zmdi zmdi-power"></i>Sair</a>
                                     </div>
                                 </div>
