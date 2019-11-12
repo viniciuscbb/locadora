@@ -145,9 +145,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Seja bem vindo,
-                                <span>usuário!</span>
-                            </h1>
+                            <h1 class="title-4">Tabela de carros disponíveis</h1>
                             <hr class="line-seprate">
                         </div>
                     </div>
@@ -159,8 +157,6 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="title-5 m-b-35">Tabela de carros disponíveis</h3>
-                            
                             <div class="table-responsive table-responsive-data2">
                                 <table class="table table-data2">
                                     <thead>

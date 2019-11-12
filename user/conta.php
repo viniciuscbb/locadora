@@ -135,9 +135,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Seja bem vindo,
-                                <span>usuário!</span>
-                            </h1>
+                            <h1 class="title-4">Visualize e edite seus dados</h1>
                             <hr class="line-seprate">
                         </div>
                     </div>
