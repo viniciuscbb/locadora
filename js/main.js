@@ -686,36 +686,26 @@
   }
 
   try {
-    //Sales chart
+    //Gráfico do mês
     var ctx = document.getElementById("sales-chart");
     if (ctx) {
       ctx.height = 150;
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+          labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"],
           type: 'line',
           defaultFontFamily: 'Poppins',
           datasets: [{
-            label: "Foods",
-            data: [0, 30, 10, 120, 50, 63, 10],
+            label: "Alugueis",
+            data: [2, 5, 3, 1, 5, 8, 7,5,2,11,4,0],
             backgroundColor: 'transparent',
-            borderColor: 'rgba(220,53,69,0.75)',
+            borderColor: 'rgba(255, 118, 117,1.0)',
             borderWidth: 3,
             pointStyle: 'circle',
             pointRadius: 5,
             pointBorderColor: 'transparent',
             pointBackgroundColor: 'rgba(220,53,69,0.75)',
-          }, {
-            label: "Electronics",
-            data: [0, 50, 40, 80, 40, 79, 120],
-            backgroundColor: 'transparent',
-            borderColor: 'rgba(40,167,69,0.75)',
-            borderWidth: 3,
-            pointStyle: 'circle',
-            pointRadius: 5,
-            pointBorderColor: 'transparent',
-            pointBackgroundColor: 'rgba(40,167,69,0.75)',
           }]
         },
         options: {
@@ -761,7 +751,7 @@
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Value',
+                labelString: 'Quantidades',
                 fontFamily: "Poppins"
 
               },
@@ -785,19 +775,19 @@
 
   try {
 
-    //Team chart
+    //Grafico do ano
     var ctx = document.getElementById("team-chart");
     if (ctx) {
       ctx.height = 150;
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ["2010", "2011", "2012", "2013", "2014", "2015", "2016"],
+          labels: ["2013", "2014", "2015", "2016", "2017", "2018", "2019"],
           type: 'line',
           defaultFontFamily: 'Poppins',
           datasets: [{
-            data: [0, 7, 3, 5, 2, 10, 7],
-            label: "Expense",
+            data: [0, 7, 3, 5, 2, 10, 56],
+            label: "Alugueis",
             backgroundColor: 'rgba(0,103,255,.15)',
             borderColor: 'rgba(0,103,255,0.5)',
             borderWidth: 3.5,
@@ -853,7 +843,7 @@
               },
               scaleLabel: {
                 display: true,
-                labelString: 'Value',
+                labelString: 'Quantidades',
                 fontFamily: "Poppins"
               },
               ticks: {

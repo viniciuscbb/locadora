@@ -160,33 +160,21 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
-
-                        <div class="col-md-6 col-lg-4">
-                            <div class="statistic__item statistic__item--orange">
-                                <h2 class="number">5</h2>
-                                <span class="desc">total de alugueis</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-shopping-cart"></i>
+                        <div class="col-lg-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <h3 class="title-2 m-b-40">Vendas do mês</h3>
+                                        <canvas id="sales-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
+                                    </div>
                                 </div>
-                            </div>
                         </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="statistic__item statistic__item--blue">
-                                <h2 class="number">1</h2>
-                                <span class="desc">contratos em aberto</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-calendar-note"></i>
+                        <div class="col-lg-6">
+                                <div class="au-card m-b-30">
+                                    <div class="au-card-inner"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <h3 class="title-2 m-b-40">Vendas do ano</h3>
+                                        <canvas id="team-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            <div class="statistic__item statistic__item--red">
-                                <h2 class="number">R$60,80</h2>
-                                <span class="desc">total em débito</span>
-                                <div class="icon">
-                                    <i class="zmdi zmdi-money"></i>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
