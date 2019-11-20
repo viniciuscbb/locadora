@@ -187,7 +187,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                             <td>R$130/dia</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-primary btn-sm" id="btnModal">
+                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
                                                         <i class="fa fa-car"></i>&nbsp;Foto
                                                     </button>
                                                     <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal"  class="btn btn-success btn-sm" id="btnDelete">
@@ -225,9 +225,8 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
     </div>
     <form method="post">
 			<!-- modal foto -->
-			<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true"
-			 data-backdrop="static">
-				<div class="modal-dialog modal-sm" role="document">
+			<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
 							<h5 class="modal-title" id="staticModalLabel">Foto</h5>
@@ -237,15 +236,12 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
 						</div>
 						<div class="modal-body">
                             <div class="has-success form-group">
-                                <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                                <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">Adiar por mais quantos dias?</label>
-                                <input type="number" id="inputSuccess2i" class="form-control-success form-control" value="0">
+                                <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled style="display:none">
+                                <img src="../images/carros/argo.jpg" alt="CoolAdmin" />
                             </div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="submit" name="btnAdiar" class="btn btn-primary">Confirmar</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
 						</div>
 					</div>
 				</div>
@@ -265,7 +261,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                             <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
                             <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
 							<p>
-								Você tem certeza que realmente deseja cancelar esse contrato?
+                                Ao clicar em confirmar você está concordando com os <a href="../termos.html"target="_blank">termos</a> e condições.
 							</p>
 						</div>
 						<div class="modal-footer">
