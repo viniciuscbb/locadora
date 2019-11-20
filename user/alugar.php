@@ -4,8 +4,8 @@ $data_inicial =  date('Y-m-d');
 $data_final = "2019-11-15";
 $time_inicial = strtotime($data_inicial);
 $time_final = strtotime($data_final);
-$diferenca = $time_final - $time_inicial; 
-$dias = (int)floor( $diferenca / (60 * 60 * 24)); 
+$diferenca = $time_final - $time_inicial;
+$dias = (int) floor($diferenca / (60 * 60 * 24));
 ?>
 
 
@@ -64,7 +64,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <i class="fas fa-tachometer-alt"></i>Painel
                                     <span class="bot-line"></span>
                                 </a>
-                                
+
                             </li>
                             <li>
                                 <a href="#">
@@ -174,12 +174,12 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     </thead>
                                     <tbody>
                                         <tr class="tr-shadow">
-                                            
+
                                             <td>Argo</td>
                                             <td>1.0</td>
                                             <td class="desc">Manual</td>
                                             <td>
-                                              <span class="status--process">Sim</span>
+                                                <span class="status--process">Sim</span>
                                             </td>
                                             <td>5</td>
                                             <td>4</td>
@@ -190,7 +190,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                                     <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
                                                         <i class="fa fa-car"></i>&nbsp;Foto
                                                     </button>
-                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal"  class="btn btn-success btn-sm" id="btnDelete">
+                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-success btn-sm" id="btnDelete">
                                                         <i class="fa fa-calendar-check-o"></i>&nbsp;Alugar
                                                     </button>
                                                 </div>
@@ -224,54 +224,54 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
 
     </div>
     <form method="post">
-			<!-- modal foto -->
-			<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-lg" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticModalLabel">Foto</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                            <div class="has-success form-group">
-                                <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled style="display:none">
-                                <img src="../images/carros/argo.jpg" alt="CoolAdmin" />
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end modal  -->
-            <!-- modal alugar -->
-			<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                            <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                            <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
-							<p>
-                                Ao clicar em confirmar você está concordando com os <a href="../termos.html"target="_blank">termos</a> e condições.
-							</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end modal small -->
+        <!-- modal foto -->
+        <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticModalLabel">Foto</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="has-success form-group">
+                            <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled style="display:none">
+                            <img src="../images/carros/argo.jpg" alt="CoolAdmin" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal  -->
+        <!-- modal alugar -->
+        <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
+                        <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+                        <p>
+                            Ao clicar em confirmar você está concordando com os <a href="../termos.html" target="_blank">termos</a> e condições.
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal small -->
     </form>
 
     <!-- Jquery JS-->

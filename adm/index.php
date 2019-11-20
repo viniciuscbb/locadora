@@ -4,8 +4,8 @@ $data_inicial =  date('Y-m-d');
 $data_final = "2019-11-15";
 $time_inicial = strtotime($data_inicial);
 $time_final = strtotime($data_final);
-$diferenca = $time_final - $time_inicial; 
-$dias = (int)floor( $diferenca / (60 * 60 * 24)); 
+$diferenca = $time_final - $time_inicial;
+$dias = (int) floor($diferenca / (60 * 60 * 24));
 ?>
 
 
@@ -40,7 +40,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
     <link href="../vendor/slick/slick.css" rel="stylesheet" media="all">
     <link href="../vendor/select2/select2.min.css" rel="stylesheet" media="all">
     <link href="../vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
-    
+
 
     <!-- Main CSS-->
     <link href="../css/theme.css" rel="stylesheet" media="all">
@@ -65,7 +65,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <i class="fas fa-tachometer-alt"></i>Painel
                                     <span class="bot-line"></span>
                                 </a>
-                                
+
                             </li>
                             <li>
                                 <a href="estoque.php">
@@ -134,7 +134,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                         <li class="list-inline-item">Painel</li>
                                     </ul>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -161,31 +161,47 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                        <h3 class="title-2 m-b-40">Vendas do mês</h3>
-                                        <canvas id="sales-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
+                            <div class="au-card m-b-30">
+                                <div class="au-card-inner">
+                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                        </div>
                                     </div>
+                                    <h3 class="title-2 m-b-40">Vendas do mês</h3>
+                                    <canvas id="sales-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
                                 </div>
+                            </div>
                         </div>
                         <div class="col-lg-6">
-                                <div class="au-card m-b-30">
-                                    <div class="au-card-inner"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                        <h3 class="title-2 m-b-40">Vendas do ano</h3>
-                                        <canvas id="team-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
+                            <div class="au-card m-b-30">
+                                <div class="au-card-inner">
+                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                        </div>
+                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                        </div>
                                     </div>
+                                    <h3 class="title-2 m-b-40">Vendas do ano</h3>
+                                    <canvas id="team-chart" height="193" width="387" class="chartjs-render-monitor" style="display: block; width: 387px; height: 193px;"></canvas>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
             <section class="p-t-20">
                 <div class="container">
-                    
+
                     <div class="row">
                         <div class="col-md-12">
                             <h3 class="title-5 m-b-35">Tabela de contratos</h3>
-                            
+
                             <div class="table-responsive table-responsive-data2">
                                 <table class="table table-data2">
                                     <thead>
@@ -203,7 +219,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                     <tbody>
                                         <tr class="tr-shadow">
                                             <?php
-                                                $ID = 15155;
+                                            $ID = 15155;
                                             ?>
                                             <td>Fernando</td>
                                             <td>Gol</td>
@@ -216,10 +232,10 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                             <td>1 Dia(s)</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID;?>>
+                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>>
                                                         <i class="fa fa-clock-o"></i>&nbsp;Dados
                                                     </button>
-                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal"  class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID;?>>
+                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>>
                                                         <i class="fa fa-times-circle"></i>&nbsp;Cancelar
                                                     </button>
                                                 </div>
@@ -229,7 +245,7 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </section>
             <!-- END DATA TABLE-->
@@ -251,65 +267,64 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
 
     </div>
     <form method="post">
-			<!-- modal ver dados do clinte -->
-			<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true"
-			 data-backdrop="static">
-				<div class="modal-dialog modal-sm" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="staticModalLabel">Dados do cliente</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-                            <div class="has-success form-group">
-                                <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                                <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">Nome</label>
-                                <input type="text" id="inputNome" class="form-control-success form-control" value="Fernando" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
-                                <input type="email" id="inputEmail" class="form-control-success form-control" value="fernando2019@hotmail.com" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">Endereço</label>
-                                <input type="text" id="inputEndereco" class="form-control-success form-control" value="Rua Alegre" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">CPF</label>
-                                <input type="text" id="inputCPF" class="form-control-success form-control" value="123.456.789-12" disabled>
-                                <label for="inputSuccess2i" class=" form-control-label">Data de nascimento</label>
-                                <input type="text" id="inputNascimento" class="form-control-success form-control" value="15/10/1998" disabled>
-                            </div>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end modal static -->
-            <!-- modal small -->
-			<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-sm" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
+        <!-- modal ver dados do clinte -->
+        <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticModalLabel">Dados do cliente</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="has-success form-group">
                             <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                            <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
-							<p>
-								Você tem certeza que realmente deseja cancelar esse contrato?
-							</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-							<button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- end modal small -->
+                            <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
+                            <label for="inputSuccess2i" class=" form-control-label">Nome</label>
+                            <input type="text" id="inputNome" class="form-control-success form-control" value="Fernando" disabled>
+                            <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
+                            <input type="email" id="inputEmail" class="form-control-success form-control" value="fernando2019@hotmail.com" disabled>
+                            <label for="inputSuccess2i" class=" form-control-label">Endereço</label>
+                            <input type="text" id="inputEndereco" class="form-control-success form-control" value="Rua Alegre" disabled>
+                            <label for="inputSuccess2i" class=" form-control-label">CPF</label>
+                            <input type="text" id="inputCPF" class="form-control-success form-control" value="123.456.789-12" disabled>
+                            <label for="inputSuccess2i" class=" form-control-label">Data de nascimento</label>
+                            <input type="text" id="inputNascimento" class="form-control-success form-control" value="15/10/1998" disabled>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal static -->
+        <!-- modal small -->
+        <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
+                        <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+                        <p>
+                            Você tem certeza que realmente deseja cancelar esse contrato?
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal small -->
     </form>
     <!-- Jquery JS-->
     <script src="../vendor/jquery-3.2.1.min.js"></script>
