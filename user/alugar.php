@@ -187,8 +187,11 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
                                             <td>R$130/dia</td>
                                             <td>
                                                 <div class="table-data-feature">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="" data-original-title="Alugar">
-                                                        <i class="zmdi zmdi-mail-send"></i>
+                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-primary btn-sm" id="btnModal">
+                                                        <i class="fa fa-car"></i>&nbsp;Foto
+                                                    </button>
+                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal"  class="btn btn-success btn-sm" id="btnDelete">
+                                                        <i class="fa fa-calendar-check-o"></i>&nbsp;Alugar
                                                     </button>
                                                 </div>
                                             </td>
@@ -220,6 +223,60 @@ $dias = (int)floor( $diferenca / (60 * 60 * 24));
         </div>
 
     </div>
+    <form method="post">
+			<!-- modal foto -->
+			<div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true"
+			 data-backdrop="static">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticModalLabel">Foto</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            <div class="has-success form-group">
+                                <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
+                                <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
+                                <label for="inputSuccess2i" class=" form-control-label">Adiar por mais quantos dias?</label>
+                                <input type="number" id="inputSuccess2i" class="form-control-success form-control" value="0">
+                            </div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="submit" name="btnAdiar" class="btn btn-primary">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal  -->
+            <!-- modal alugar -->
+			<div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+                            <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
+                            <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+							<p>
+								Você tem certeza que realmente deseja cancelar esse contrato?
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+							<button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal small -->
+    </form>
 
     <!-- Jquery JS-->
     <script src="../vendor/jquery-3.2.1.min.js"></script>
