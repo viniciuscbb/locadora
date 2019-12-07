@@ -230,7 +230,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</a>.</p>
+                                <p>Direitos autorais © 2019 NeedCar. Todos os direitos reservados.</a>.</p>
                             </div>
                         </div>
                     </div>

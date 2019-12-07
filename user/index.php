@@ -253,7 +253,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</p>
+                                <p>Direitos autorais © 2019 NeedCar. Todos os direitos reservados.</p>
                             </div>
                         </div>
                     </div>

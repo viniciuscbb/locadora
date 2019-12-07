@@ -97,12 +97,6 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                                             <span class="email">e-mail</span>
                                         </div>
                                     </div>
-                                    <div class="account-dropdown__body">
-                                        <div class="account-dropdown__item">
-                                            <a href="conta.php">
-                                                <i class="zmdi zmdi-account"></i>Seus dados</a>
-                                        </div>
-                                    </div>
                                     <div class="account-dropdown__footer">
                                         <a href="sair.php">
                                             <i class="zmdi zmdi-power"></i>Sair</a>
@@ -256,7 +250,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</p>
+                                <p>Direitos autorais © 2019 NeedCar. Todos os direitos reservados.</p>
                             </div>
                         </div>
                     </div>

@@ -213,7 +213,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Direitos autorais © 2019 FastCar. Todos os direitos reservados.</p>
+                                <p>Direitos autorais © 2019 NeedCar. Todos os direitos reservados.</p>
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                         <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
                         <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
                         <p>
-                            Ao clicar em confirmar você está concordando com os <a href="../termos.html" target="_blank">termos</a> e condições.
+                            Ao clicar em confirmar você está concordando com os <a href="../termos.html" target="_blank">termos e condições</a>.
                         </p>
                     </div>
                     <div class="modal-footer">
