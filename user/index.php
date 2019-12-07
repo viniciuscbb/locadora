@@ -1,11 +1,39 @@
 <?php
-
+include('../functions.php');
+/*
 $data_inicial =  date('Y-m-d');
 $data_final = "2019-11-15";
 $time_inicial = strtotime($data_inicial);
 $time_final = strtotime($data_final);
 $diferenca = $time_final - $time_inicial;
 $dias = (int) floor($diferenca / (60 * 60 * 24));
+*/
+
+function UserID(){
+$sei = $_COOKIE['user'];
+$conection = conection();
+$busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
+$identificacao = mysqli_query($conection, $busca);
+$retorno = mysqli_fetch_array($identificacao);
+return $retorno['id_cliente'];
+}	
+
+function getUserName(){
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}
+function getEmail(){
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['email'];
+}
 ?>
 
 
@@ -81,7 +109,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">Nome do usuário</a>
+                                    <a class="js-acc-btn" href="#"><?php echo getUserName();?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -92,9 +120,9 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#">Nome do usuário</a>
+                                                <a href="#"><?php echo getUserName();?></a>
                                             </h5>
-                                            <span class="email">e-mail</span>
+                                            <span class="email"><?php echo getEmail();?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
