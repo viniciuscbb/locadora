@@ -1,6 +1,6 @@
 <?php
 $host="localhost";
 $user="root";
-$password="102030";
+$password="";
 $dbname="locadora";
 ?>
