@@ -1,3 +1,24 @@
+<?php
+if (isset($_POST['btnRegistrar'])) {
+    include('functions.php');
+    $conection = conection();
+    $username = mysqli_real_escape_string($conection, $_POST['username']);
+    $email = mysqli_real_escape_string($conection, $_POST['email']);
+    $endereco = mysqli_real_escape_string($conection, $_POST['endereco']);
+    $cpf = mysqli_real_escape_string($conection, $_POST['cpf']);
+    $data_nascimento = mysqli_real_escape_string($conection, $_POST['data_nascimento']);
+    $password = mysqli_real_escape_string($conection, $_POST['password']);
+    $query = mysqli_query($conection, "INSERT INTO cliente (nome, endereco, cpf, data_nascimento, email, senha) VALUES ('$username', '$endereco', '$cpf', '$data_nascimento', '$email', '$password')");
+    if ($query) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Usuário cadastrado com sucesso!');window.location.
+          href='login.php'</script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='login.php';</script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,7 +98,7 @@
                                         <input type="checkbox" name="aggree">Concorde com os termos e a política
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Registrar</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" name="btnRegistrar" type="submit">Registrar</button>
                             </form>
                             <div class="register-link">
                                 <p>

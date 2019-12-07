@@ -9,16 +9,18 @@ $diferenca = $time_final - $time_inicial;
 $dias = (int) floor($diferenca / (60 * 60 * 24));
 */
 
-function UserID(){
-$sei = $_COOKIE['user'];
-$conection = conection();
-$busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
-$identificacao = mysqli_query($conection, $busca);
-$retorno = mysqli_fetch_array($identificacao);
-return $retorno['id_cliente'];
-}	
+function UserID()
+{
+    $sei = $_COOKIE['user'];
+    $conection = conection();
+    $busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['id_cliente'];
+}
 
-function getUserName(){
+function getUserName()
+{
     $id = UserID();
     $conection = conection();
     $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
@@ -26,7 +28,8 @@ function getUserName(){
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['nome'];
 }
-function getEmail(){
+function getEmail()
+{
     $id = UserID();
     $conection = conection();
     $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
@@ -35,13 +38,35 @@ function getEmail(){
     return $retorno['email'];
 }
 
-function getContratos(){
+function getContratos()
+{
     $id = UserID();
     $conection = conection();
-    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' having status = 'aberto'";
+    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['total'];
+}
+
+function getAlugueis()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['total'];
+}
+
+function getDebito()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    $result = number_format($retorno['total'], 2, ',', '.');
+    return $result;
 }
 
 ?>
@@ -119,7 +144,7 @@ function getContratos(){
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#"><?php echo getUserName();?></a>
+                                    <a class="js-acc-btn" href="#"><?php echo getUserName(); ?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -130,9 +155,9 @@ function getContratos(){
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#"><?php echo getUserName();?></a>
+                                                <a href="#"><?php echo getUserName(); ?></a>
                                             </h5>
-                                            <span class="email"><?php echo getEmail();?></span>
+                                            <span class="email"><?php echo getEmail(); ?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
@@ -201,7 +226,7 @@ function getContratos(){
 
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--orange">
-                                <h2 class="number">5</h2>
+                                <h2 class="number"><?php echo getAlugueis(); ?></h2>
                                 <span class="desc">total de alugueis</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-shopping-cart"></i>
@@ -219,7 +244,7 @@ function getContratos(){
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--red">
-                                <h2 class="number">R$60,80</h2>
+                                <h2 class="number">R$<?php echo getDebito(); ?></h2>
                                 <span class="desc">total em débito</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-money"></i>
