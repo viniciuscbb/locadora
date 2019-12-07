@@ -1,3 +1,21 @@
+<?php
+	if (isset($_POST['Login'])){
+        include('functions.php');
+        $conection = conection();
+        $myusername= mysqli_real_escape_string($conection, $_POST['myusername']);
+        $mypassword= mysqli_real_escape_string($conection, $_POST['mypassword']);
+        $query = mysqli_query($conection, "SELECT * FROM cliente WHERE email='$myusername' and senha='$mypassword'");
+        $resultado = mysqli_num_rows($query);
+        if($resultado == 1){
+            setcookie('user',$myusername);
+		    $_SESSION['myusername']=true;
+		    header("location: user/index.php");
+		} else {	
+		    echo"<script language='javascript' type='text/javascript'>alert('Login e/ou senha incorretos');window.location.href='login.php';</script>";
+		}
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,11 +68,11 @@
                             <form action="" method="post">
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input class="au-input au-input--full" type="email" name="email" placeholder="Endereço do e-mail">
+                                    <input class="au-input au-input--full" name="myusername" type="email" name="email" placeholder="Endereço do e-mail">
                                 </div>
                                 <div class="form-group">
                                     <label>Senha</label>
-                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Senha do Usuário">
+                                    <input class="au-input au-input--full" name="mypassword" type="password" name="password" placeholder="Senha do Usuário">
                                 </div>
                                 <div class="login-checkbox">
                                     <label>
@@ -64,7 +82,7 @@
                                         <a href="#">Esqueceu a senha?</a>
                                     </label>
                                 </div>
-                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">Entrar</button>
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" name="Login" type="submit">Entrar</button>
                             </form>
                             <div class="register-link">
                                 <p>
@@ -107,4 +125,3 @@
 </body>
 
 </html>
-<!-- end document-->
