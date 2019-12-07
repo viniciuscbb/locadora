@@ -2,16 +2,18 @@
 
 include('../functions.php');
 
-function UserID(){
-$sei = $_COOKIE['user'];
-$conection = conection();
-$busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
-$identificacao = mysqli_query($conection, $busca);
-$retorno = mysqli_fetch_array($identificacao);
-return $retorno['id_cliente'];
-}	
+function UserID()
+{
+    $sei = $_COOKIE['user'];
+    $conection = conection();
+    $busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['id_cliente'];
+}
 
-function getUserName(){
+function getUserName()
+{
     $id = UserID();
     $conection = conection();
     $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
@@ -19,7 +21,9 @@ function getUserName(){
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['nome'];
 }
-function getEmail(){
+
+function getEmail()
+{
     $id = UserID();
     $conection = conection();
     $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
@@ -28,6 +32,52 @@ function getEmail(){
     return $retorno['email'];
 }
 
+function getEndereco()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT endereco FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['endereco'];
+}
+
+function getCpf()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT cpf FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['cpf'];
+}
+
+function getNascimento()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT data_nascimento FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['data_nascimento'];
+}
+
+if (isset($_POST['btnSalvar'])) {
+    $id = UserID();
+    $conection = conection();
+    $senha1 = mysqli_real_escape_string($conection, $_POST['senha1']);
+    $senha2 = mysqli_real_escape_string($conection, $_POST['senha2']);
+    if ($senha1 == $senha2) {
+        $sql = "UPDATE cliente SET senha='$senha1' WHERE id_cliente='$id'";
+        if (mysqli_query($conection, $sql)) {
+            echo"<script language='javascript' type='text/javascript'>alert('Senha alterada com sucesso');</script>";
+        } else {
+            echo"<script language='javascript' type='text/javascript'>alert('Erro ao salvar');</script>";
+        }
+    } else {
+        echo"<script language='javascript' type='text/javascript'>alert('As senhas não são iguais');</script>";
+     }
+}
 
 ?>
 
@@ -43,7 +93,7 @@ function getEmail(){
     <meta name="keywords" content="au theme template">
 
     <!-- Title Page-->
-    <title>Dashboard 3</title>
+    <title>NeedCar</title>
 
     <!-- Fontfaces CSS-->
     <link href="../css/font-face.css" rel="stylesheet" media="all">
@@ -102,7 +152,7 @@ function getEmail(){
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">Nome do Usuário</a>
+                                    <a class="js-acc-btn" href="#"><?php echo getUserName(); ?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -113,9 +163,9 @@ function getEmail(){
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="index.php">Nome do Usuário</a>
+                                                <a href="index.php"><?php echo getUserName(); ?></a>
                                             </h5>
-                                            <span class="email">e-mail</span>
+                                            <span class="email"><?php echo getEmail(); ?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
@@ -191,7 +241,7 @@ function getEmail(){
                                                 <label class=" form-control-label">Nome </label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="text" id="disabled-input" name="disabled-input" placeholder="Usuário" disabled="" class="form-control">
+                                                <input type="text" id="disabled-input" name="disabled-input" placeholder="<?php echo getUserName(); ?>" disabled="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -199,7 +249,7 @@ function getEmail(){
                                                 <label for="email-input" class=" form-control-label">Endereço</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="text" name="adress-input" placeholder="Insira aqui seu novo endereço" class="form-control">
+                                                <input type="text" name="adress-input" placeholder="<?php echo getEndereco(); ?>" disabled="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -207,7 +257,7 @@ function getEmail(){
                                                 <label for="email-input" class=" form-control-label">CPF</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="text" name="cpf-input" placeholder="CPF" disabled="" class="form-control">
+                                                <input type="text" name="cpf-input" placeholder="<?php echo getCpf(); ?>" disabled="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -215,7 +265,7 @@ function getEmail(){
                                                 <label for="email-input" class=" form-control-label">Data de nascimento</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="text" name="cpf-input" placeholder="Data" disabled="" class="form-control">
+                                                <input type="text" name="cpf-input" placeholder="<?php echo getNascimento(); ?>" disabled="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -223,7 +273,7 @@ function getEmail(){
                                                 <label for="email-input" class=" form-control-label">E-mail</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="email" id="email-input" name="email-input" placeholder="Insira aqui seu novo e-mail" class="form-control">
+                                                <input type="email" id="email-input" name="email-input" placeholder="<?php echo getEmail(); ?>" disabled="" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -231,7 +281,7 @@ function getEmail(){
                                                 <label for="password-input" class=" form-control-label">Password</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="password" id="password-input" name="password-input" placeholder="Insira aqui sua nova senha" class="form-control">
+                                                <input type="password" id="password-input" name="senha1" placeholder="Insira aqui sua nova senha" class="form-control">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -239,11 +289,11 @@ function getEmail(){
                                                 <label for="password-input" class=" form-control-label">Password</label>
                                             </div>
                                             <div class="col-12 col-md-9">
-                                                <input type="password" id="password-input" name="password-input" placeholder="Repita a senha" class="form-control">
+                                                <input type="password" id="password-input" name="senha2" placeholder="Repita a senha" class="form-control">
                                             </div>
                                         </div>
                                         <div class="card-footer">
-                                            <button type="submit" class="btn btn-primary btn-sm">
+                                            <button name="btnSalvar" type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fa fa-dot-circle-o"></i> Salvar
                                             </button>
                                             <button type="reset" class="btn btn-danger btn-sm">
