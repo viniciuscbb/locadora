@@ -38,7 +38,7 @@ function getEmail(){
 function getContratos(){
     $id = UserID();
     $conection = conection();
-    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' having status = 'aberto'";
+    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['total'];
