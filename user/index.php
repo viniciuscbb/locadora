@@ -34,6 +34,16 @@ function getEmail(){
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['email'];
 }
+
+function getContratos(){
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' having status = 'aberto'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['total'];
+}
+
 ?>
 
 
@@ -200,7 +210,7 @@ function getEmail(){
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="statistic__item statistic__item--blue">
-                                <h2 class="number">1</h2>
+                                <h2 class="number"><?php echo getContratos(); ?></h2>
                                 <span class="desc">contratos em aberto</span>
                                 <div class="icon">
                                     <i class="zmdi zmdi-calendar-note"></i>
