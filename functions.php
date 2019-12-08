@@ -174,10 +174,10 @@ function getAlugueis()
 function administrador($id)
 {
   $conection = conection();
-  $busca = "SELECT nivel FROM adm WHERE id_cliente='$id'";
+  $busca = "SELECT * FROM adm WHERE id_cliente='$id'";
   $identificacao = mysqli_query($conection, $busca);
-  $retorno = mysqli_fetch_array($identificacao);
-  if(($retorno['nivel']) == 1 ){
+  $resultado = mysqli_num_rows($identificacao);
+  if($resultado >= 1 ){
     header("location: ../adm/index.php");
   }
 }

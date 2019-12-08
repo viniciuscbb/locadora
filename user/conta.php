@@ -1,36 +1,5 @@
 <?php
-
 include('../functions.php');
-
-function UserID()
-{
-    $sei = $_COOKIE['user'];
-    $conection = conection();
-    $busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['id_cliente'];
-}
-
-function getUserName()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getEmail()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['email'];
-}
 
 function getEndereco()
 {
