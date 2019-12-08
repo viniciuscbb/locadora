@@ -181,3 +181,34 @@ function administrador($id)
     header("location: ../adm/index.php");
   }
 }
+
+function getEndereco()
+{
+  $id = UserID();
+  $conection = conection();
+  $busca = "SELECT endereco FROM cliente WHERE id_cliente='$id'";
+  $identificacao = mysqli_query($conection, $busca);
+  $retorno = mysqli_fetch_array($identificacao);
+  return $retorno['endereco'];
+}
+
+function getCpf()
+{
+  $id = UserID();
+  $conection = conection();
+  $busca = "SELECT cpf FROM cliente WHERE id_cliente='$id'";
+  $identificacao = mysqli_query($conection, $busca);
+  $retorno = mysqli_fetch_array($identificacao);
+  return $retorno['cpf'];
+}
+
+function getNascimento()
+{
+  $id = UserID();
+  $conection = conection();
+  $busca = "SELECT data_nascimento FROM cliente WHERE id_cliente='$id'";
+  $identificacao = mysqli_query($conection, $busca);
+  $retorno = mysqli_fetch_array($identificacao);
+  return date("d/m/Y", strtotime($retorno['data_nascimento']));
+}
+?>
