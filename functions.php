@@ -52,16 +52,35 @@ function getDebito()
 {
   $id = UserID();
   $conection = conection();
-  $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'Aberto'";
+  $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $valor = $retorno['total'];
 
+  $busca = "SELECT data_vencimento FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
+  $identificacao = mysqli_query($conection, $busca);
+  $retorno = mysqli_fetch_array($identificacao);
+  $dataFinal = $retorno['data_vencimento'];
+
+  $busca = "SELECT data_aluguel FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
+  $identificacao = mysqli_query($conection, $busca);
+  $retorno = mysqli_fetch_array($identificacao);
+  $dataInicial = $retorno['data_aluguel'];
+
+  $time_inicial = strtotime($dataInicial);
+  $time_final = strtotime($dataFinal);
+  $diferenca = $time_final - $time_inicial;
+  $dias = (int) floor($diferenca / (60 * 60 * 24));
+  $diasRestantes = $dias;
+  if ($diasRestantes < 1) {
+    $dias = 0;
+  }
+  
   $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id' and status = 'Vencido'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $multa = $retorno['multa'];
-  $resultado = $valor + $multa;
+  $resultado = $dias * $valor + $multa;
 
   $result = number_format($resultado, 2, ',', '.');
   return $result;
