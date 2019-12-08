@@ -2,66 +2,6 @@
 
 include('../functions.php');
 
-function UserID()
-{
-    $sei = $_COOKIE['user'];
-    $conection = conection();
-    $busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['id_cliente'];
-}
-
-function getUserName()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getEmail()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['email'];
-}
-
-function getEndereco()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT endereco FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['endereco'];
-}
-
-function getCpf()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT cpf FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['cpf'];
-}
-
-function getNascimento()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT data_nascimento FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return date("d/m/Y", strtotime($retorno['data_nascimento']));
-}
-
 if (isset($_POST['btnSalvar'])) {
     $id = UserID();
     $conection = conection();
@@ -70,13 +10,13 @@ if (isset($_POST['btnSalvar'])) {
     if ($senha1 == $senha2) {
         $sql = "UPDATE cliente SET senha='$senha1' WHERE id_cliente='$id'";
         if (mysqli_query($conection, $sql)) {
-            echo"<script language='javascript' type='text/javascript'>alert('Senha alterada com sucesso');</script>";
+            echo "<script language='javascript' type='text/javascript'>alert('Senha alterada com sucesso');</script>";
         } else {
-            echo"<script language='javascript' type='text/javascript'>alert('Erro ao salvar');</script>";
+            echo "<script language='javascript' type='text/javascript'>alert('Erro ao salvar');</script>";
         }
     } else {
-        echo"<script language='javascript' type='text/javascript'>alert('As senhas não são iguais');</script>";
-     }
+        echo "<script language='javascript' type='text/javascript'>alert('As senhas não são iguais');</script>";
+    }
 }
 
 ?>

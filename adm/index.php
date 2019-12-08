@@ -74,7 +74,7 @@ include('../functions.php');
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#"><?php echo getUserName();?></a>
+                                    <a class="js-acc-btn" href="#"><?php echo getUserName(); ?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -85,9 +85,9 @@ include('../functions.php');
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#"><?php echo getUserName();?></a>
+                                                <a href="#"><?php echo getUserName(); ?></a>
                                             </h5>
-                                            <span class="email"><?php echo getEmail();?></span>
+                                            <span class="email"><?php echo getEmail(); ?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
@@ -135,7 +135,7 @@ include('../functions.php');
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="title-4">Seja bem vindo,
-                                <span><?php echo getUserName();?>!</span>
+                                <span><?php echo getUserName(); ?>!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>

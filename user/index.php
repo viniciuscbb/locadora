@@ -136,7 +136,7 @@ administrador(UserID());
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="title-4">Seja bem vindo,
-                                <span><?php echo getUserName();?>!</span>
+                                <span><?php echo getUserName(); ?>!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -237,8 +237,7 @@ administrador(UserID());
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                            <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
+                            <input type="hidden" name="inputCodigoAdiar" id="inputModalAdiar" class="form-control-success form-control" value="0">
                             <label for="inputSuccess2i" class=" form-control-label">Adiar por mais quantos dias?</label>
                             <input type="number" id="inputSuccess2i" class="form-control-success form-control" value="0">
                         </div>
@@ -262,7 +261,7 @@ administrador(UserID());
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input name="inputCodigo" id="inputModalCancelar" class="form-control-success form-control" value="" type="hidden">
+                        <input type="hidden" name="inputCodigo" id="inputModalCancelar" class="form-control-success form-control" value="">
                         <p>
                             Você tem certeza que realmente deseja cancelar esse contrato?
                         </p>
