@@ -1,11 +1,24 @@
 <?php
-
-$data_inicial =  date('Y-m-d');
-$data_final = "2019-11-15";
-$time_inicial = strtotime($data_inicial);
-$time_final = strtotime($data_final);
-$diferenca = $time_final - $time_inicial;
-$dias = (int) floor($diferenca / (60 * 60 * 24));
+if (isset($_POST['btnAdicionar'])) {
+    include('../functions.php');
+    $conection = conection();
+    $modelo = mysqli_real_escape_string($conection, $_POST['modelo']);
+    $motor = mysqli_real_escape_string($conection, $_POST['motor']);
+    $cambio = mysqli_real_escape_string($conection, $_POST['cambio']);
+    $arCondicionado = mysqli_real_escape_string($conection, $_POST['arCondicionado']);
+    $passageiros = mysqli_real_escape_string($conection, $_POST['passageiros']);
+    $portas = mysqli_real_escape_string($conection, $_POST['portas']);
+    $direcao = mysqli_real_escape_string($conection, $_POST['direcao']);
+    $valor = mysqli_real_escape_string($conection, $_POST['valor']);
+    $query = mysqli_query($conection, "INSERT INTO carro (modelo, motor, cambio, ar_condicionado, passageiros, portas, direcao, valor) VALUES ('$modelo', '$motor', '$cambio', '$arCondicionado', '$passageiros', '$portas', '$direcao', '$valor')");
+    if ($query) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Cadastro realizado com sucesso!');
+         </script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Dados incorretos');window.location.href='login.php';</script>";
+    }
+}
 ?>
 
 
@@ -225,7 +238,7 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticModalLabel">Foto</h5>
+                            <h5 class="modal-title" id="staticModalLabel">Adicionar novo carro</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -233,27 +246,39 @@ $dias = (int) floor($diferenca / (60 * 60 * 24));
                         <div class="modal-body">
                             <div class="has-success form-group">
                                 <label for="inputSuccess2i" class=" form-control-label">Modelo</label>
-                                <input type="text" id="inputNome" class="form-control-success form-control" value="">
+                                <input type="text" name="modelo" id="inputModelo" class="form-control-success form-control" value="">
                                 <label for="inputSuccess2i" class=" form-control-label">Motor</label>
-                                <input type="number" id="inputEmail" class="form-control-success form-control" value="">
+                                <input type="text" name="motor" id="inputEmail" class="form-control-success form-control" value="">
                                 <label for="inputSuccess2i" class=" form-control-label">Cambio</label>
-                                <input type="text" id="inputEndereco" class="form-control-success form-control" value="">
-                                <label for="inputSuccess2i" class=" form-control-label">Cambio</label>
-                                <input type="text" id="inputCPF" class="form-control-success form-control" value="">
+                                <select name="cambio" id="inputNome" class="form-control">
+                                    <option>Selecione uma opção</option>
+                                    <option>Automático</option>
+                                    <option>Manual</option>
+                                </select>
                                 <label for="inputSuccess2i" class=" form-control-label">Ar Condicionado</label>
-                                <input type="text" id="inputNascimento" class="form-control-success form-control" value="">
+                                <select name="arCondicionado" id="inputNome" class="form-control">
+                                    <option >Selecione uma opção</option>
+                                    <option value="1">Sim</option>
+                                    <option value="0">Não</option>
+                                </select>
                                 <label for="inputSuccess2i" class=" form-control-label">Passageiros</label>
-                                <input type="number" id="inputNome" class="form-control-success form-control" value="">
+                                <input type="number" name="passageiros" id="inputNome" class="form-control-success form-control" value="">
                                 <label for="inputSuccess2i" class=" form-control-label">Portas</label>
-                                <input type="number" id="inputNome" class="form-control-success form-control" value="">
+                                <input type="number" name="portas" id="inputNome" class="form-control-success form-control" value="">
                                 <label for="inputSuccess2i" class=" form-control-label">Direção</label>
-                                <input type="text" id="inputNome" class="form-control-success form-control" value="">
+                                <select name="direcao" id="inputNome" class="form-control">
+                                    <option>Selecione uma opção</option>
+                                    <option>Hidráulica</option>
+                                    <option>Eletro-hidráulica</option>
+                                    <option>Elétrica</option>
+                                </select>
                                 <label for="inputSuccess2i" class=" form-control-label">Valor</label>
-                                <input type="number" id="inputNome" class="form-control-success form-control" value="">
+                                <input type="number" name="valor" id="inputNome" class="form-control-success form-control" value="">
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">Adicionar</button>
+                            <button type="submit" name="btnAdicionar" class="btn btn-primary">Adicionar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>

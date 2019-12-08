@@ -25,7 +25,8 @@ function calcDias($dataFinal){
     return $dias; 
 }
 
-function calcMulta($dataFinal, $valor){
+function calcMulta($dataFinal, $valor, $id){
+  $conection = conection();
   if(calcDias($dataFinal) < 1){
     $dataInicial = date('Y-m-d');
     $time_inicial = strtotime($dataInicial);
@@ -33,11 +34,34 @@ function calcMulta($dataFinal, $valor){
     $diferenca = $time_final - $time_inicial;
     $dias = (int) floor($diferenca / (60 * 60 * 24));
     $diasRestantes   = $dias;
-    $multa = $valor + (abs($diasRestantes) * ($valor * 2/100));
+    $multa = abs($diasRestantes) * ($valor * 2/100);
+    $conection = conection();
+    $busca = "UPDATE aluguel SET multa = '$multa' where id_aluguel = '$id'";
+    if(mysqli_query($conection, $busca)){
+    }
+    
   }else{
     $multa = 0;
   }
   return $multa;
+}
+
+function getDebito(){
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    $valor = $retorno['total'];
+
+    $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    $multa = $retorno['multa'];
+    $resultado = $valor + $multa;
+
+    $result = number_format($resultado, 2, ',', '.');
+    return $result;
 }
 
 function mostraListaAluguel($ID){
@@ -59,7 +83,7 @@ function mostraListaAluguel($ID){
             <td>'.$dataFinal.'</td>
             <td>R$'.number_format($valor, 2, ',', '.').'</td>
             <td>'.$status.'</td>
-            <td>R$'.number_format(calcMulta($dataFinal, $valor), 2, ',', '.').'</td>
+            <td>R$'.number_format(calcMulta($dataFinal, $valor, $ID), 2, ',', '.').'</td>
             <td>'.calcDias($dataFinal).'</td>
             <td>
               <div class="table-data-feature">

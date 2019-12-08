@@ -50,17 +50,6 @@ function getAlugueis()
     return $retorno['total'];
 }
 
-function getDebito()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    $result = number_format($retorno['total'], 2, ',', '.');
-    return $result;
-}
-
 ?>
 
 
