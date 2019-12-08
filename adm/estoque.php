@@ -1,4 +1,6 @@
 <?php
+include('../functions.php');
+
 if (isset($_POST['btnAdicionar'])) {
     include('../functions.php');
     $conection = conection();
@@ -94,7 +96,7 @@ if (isset($_POST['btnAdicionar'])) {
                                     <img src="../images/icon/user.png" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">Nome do usuário</a>
+                                    <a class="js-acc-btn" href="#"><?php echo getUserName(); ?></a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -105,9 +107,9 @@ if (isset($_POST['btnAdicionar'])) {
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#">Nome do usuário</a>
+                                                <a href="#"><?php echo getUserName(); ?></a>
                                             </h5>
-                                            <span class="email">e-mail</span>
+                                            <span class="email"><?php echo getEmail(); ?></span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
@@ -153,8 +155,8 @@ if (isset($_POST['btnAdicionar'])) {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Seja bem vindo,
-                                <span>usuário!</span>
+                            <h1 class="title-4">Seja bem vindo(a),
+                                <span><?php echo getUserName(); ?>!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -257,7 +259,7 @@ if (isset($_POST['btnAdicionar'])) {
                                 </select>
                                 <label for="inputSuccess2i" class=" form-control-label">Ar Condicionado</label>
                                 <select name="arCondicionado" id="inputNome" class="form-control">
-                                    <option >Selecione uma opção</option>
+                                    <option>Selecione uma opção</option>
                                     <option value="1">Sim</option>
                                     <option value="0">Não</option>
                                 </select>

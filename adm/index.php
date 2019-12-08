@@ -135,7 +135,7 @@ include('../functions.php');
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Seja bem vindo,
+                            <h1 class="title-4">Seja bem vindo(a),
                                 <span><?php echo getUserName(); ?>!</span>
                             </h1>
                             <hr class="line-seprate">
