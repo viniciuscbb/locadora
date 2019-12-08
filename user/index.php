@@ -309,7 +309,7 @@ administrador(UserID());
 if (isset($_POST['btnCancelar'])) {
     $conection = conection();
     $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
-    $query = mysqli_query($conection, "DELETE FROM aluguel WHERE id_aluguel = '$inputCodigo'");
+    $query = mysqli_query($conection, "UPDATE aluguel SET status = 'Fechado' WHERE id_aluguel = '$inputCodigo'");
     if ($query) {
         echo "<script language='javascript' type='text/javascript'>
           alert('Contrato cancelado!');window.location = ('index.php');

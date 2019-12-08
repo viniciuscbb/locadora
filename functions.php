@@ -42,7 +42,7 @@ function calcMulta($dataFinal, $valor, $id)
     if (mysqli_query($conection, $busca)) { }
   } else {
     $multa = 0;
-    $busca = "UPDATE aluguel SET multa = '$multa', status = 'Aberto' where id_aluguel = '$id'";
+    $busca = "UPDATE aluguel SET multa = '$multa' where id_aluguel = '$id'";
     if (mysqli_query($conection, $busca)) { }
   }
   return $multa;
@@ -52,17 +52,17 @@ function getDebito()
 {
   $id = UserID();
   $conection = conection();
-  $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
+  $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $valor = $retorno['total'];
 
-  $busca = "SELECT data_vencimento FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
+  $busca = "SELECT data_vencimento FROM aluguel WHERE id_cliente='$id'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $dataFinal = $retorno['data_vencimento'];
 
-  $busca = "SELECT data_aluguel FROM aluguel WHERE id_cliente='$id' and not status = 'Fechado'";
+  $busca = "SELECT data_aluguel FROM aluguel WHERE id_cliente='$id'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $dataInicial = $retorno['data_aluguel'];
@@ -89,7 +89,7 @@ function getDebito()
 function mostraListaAluguel($ID)
 {
   $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID' and not status = 'Fechado'");
+  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID'");
 
   while ($row = mysqli_fetch_array($query)) {
     $ID = $row['id_aluguel'];
@@ -100,14 +100,16 @@ function mostraListaAluguel($ID)
     $status   = $row['status'];
     if ($status == "Vencido") {
       $status = '<span class="status--denied">Vencido</span>';
-    } else {
+    } else if ($status == "Aberto") {
       $status = '<span class="status--process">Aberto</span>';
+    }else {
+      $status = '<span class="status--denied">Fechado</span>';
     }
-    if (calcDias($dataFinal) > 0) {
+    /*if (calcDias($dataFinal) > 0) {
       $status = '<span class="status--process">Aberto</span>';
     } else {
       $status = '<span class="status--denied">Vencido</span>';
-    }
+    }*/
     echo '<tr  class="tr-shadow">
             <td class="desc">' . $modelo . '</td>
             <td>' . date("d/m/Y", strtotime($dataInicial)) . '</td>
@@ -117,19 +119,11 @@ function mostraListaAluguel($ID)
             <td>R$ ' . number_format(calcMulta($dataFinal, $valor, $ID), 2, ',', '.') . '</td>
             <td>' . calcDias($dataFinal) . '</td>
             <td>';
-    if (calcDias($dataFinal) > 0) {
+    if (calcDias($dataFinal) > 0 && $status == '<span class="status--process">Aberto</span>') {
       echo '<div class="table-data-feature">
                       <button onclick="trocar(' . $ID . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal">
                         <i class="fa fa-clock-o"></i>&nbsp;Adiar
                       </button>
-                      <button onclick="trocar(' . $ID . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete">
-                        <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                      </button>
-                    </div>
-                  </td>
-                </tr>';
-    } else {
-      echo '<div class="table-data-feature">
                       <button onclick="trocar(' . $ID . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete">
                         <i class="fa fa-times-circle"></i>&nbsp;Cancelar
                       </button>
