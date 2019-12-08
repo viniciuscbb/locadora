@@ -22,7 +22,7 @@ function calcDias($dataFinal){
     if($diasRestantes < 1){
       $dias = 0;
     }
-    return $dias; 
+    return $dias;
 }
 
 function calcMulta($dataFinal, $valor){
