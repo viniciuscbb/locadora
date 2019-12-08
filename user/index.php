@@ -1,58 +1,12 @@
 <?php
 include('../functions.php');
 
-function UserID()
-{
-    $sei = $_COOKIE['user'];
-    $conection = conection();
-    $busca = "SELECT id_cliente FROM cliente WHERE email='$sei'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['id_cliente'];
-}
-
-function getUserName()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-function getEmail()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT email FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['email'];
-}
-
-function getContratos()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['total'];
-}
-
-function getAlugueis()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT count(id_aluguel) as total FROM aluguel WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['total'];
-}
+administrador(UserID());
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -80,6 +34,7 @@ function getAlugueis()
     <!-- Main CSS-->
     <link href="../css/theme.css" rel="stylesheet" media="all">
 </head>
+
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER DESKTOP-->
@@ -181,7 +136,7 @@ function getAlugueis()
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="title-4">Seja bem vindo,
-                                <span>usuário!</span>
+                                <span><?php echo getUserName();?>!</span>
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -307,8 +262,7 @@ function getAlugueis()
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                        <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+                        <input name="inputCodigo" id="inputModalCancelar" class="form-control-success form-control" value="" type="hidden">
                         <p>
                             Você tem certeza que realmente deseja cancelar esse contrato?
                         </p>
@@ -350,3 +304,20 @@ function getAlugueis()
 
 </html>
 <!-- end document-->
+<?php
+
+if (isset($_POST['btnCancelar'])) {
+    $conection = conection();
+    $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
+    echo $inputCodigo;
+    $query = mysqli_query($conection, "DELETE FROM aluguel WHERE id_aluguel = '$inputCodigo'");
+    if ($query) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Alguel cancelado!');
+         </script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
+    }
+}
+
+?>
