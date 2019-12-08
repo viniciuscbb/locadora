@@ -36,7 +36,7 @@ function calcMulta($dataFinal, $valor, $id){
     $diasRestantes   = $dias;
     $multa = abs($diasRestantes) * ($valor * 2/100);
     $conection = conection();
-    $busca = "UPDATE aluguel SET multa = '$multa' where id_aluguel = '$id'";
+    $busca = "UPDATE aluguel SET multa = '$multa', status = 'Vencido' where id_aluguel = '$id'";
     if(mysqli_query($conection, $busca)){
     }
     
@@ -49,12 +49,12 @@ function calcMulta($dataFinal, $valor, $id){
 function getDebito(){
     $id = UserID();
     $conection = conection();
-    $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'aberto'";
+    $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id' and status = 'Aberto'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
     $valor = $retorno['total'];
 
-    $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id'";
+    $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id' and status = 'Vencido'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
     $multa = $retorno['multa'];
@@ -66,8 +66,7 @@ function getDebito(){
 
 function mostraListaAluguel($ID){
   $conection = conection();
-  
-  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID' and status = 'aberto'");
+  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID' and not status = 'Fechado'");
   
   while($row = mysqli_fetch_array($query)){
     $ID = $row['id_aluguel'];
@@ -76,26 +75,42 @@ function mostraListaAluguel($ID){
     $dataFinal    = $row['data_vencimento'];
     $valor   = $row['valor'];
     $status   = $row['status'];
+    if ($status == "Vencido"){
+      $status = '<span class="status--denied">Vencido</span>';
+    }else{
+      $status = '<span class="status--process">Aberto</span>';
+    }
     
     echo '<tr  class="tr-shadow">
-            <td>'.$modelo.'</td>
-            <td>'.$dataInicial.'</td>
-            <td>'.$dataFinal.'</td>
-            <td>R$'.number_format($valor, 2, ',', '.').'</td>
+            <td class="desc">'.$modelo.'</td>
+            <td>'.date("d/m/Y", strtotime($dataInicial)).'</td>
+            <td>'.date("d/m/Y", strtotime($dataFinal)).'</td>
+            <td>R$ '.number_format($valor, 2, ',', '.').'</td>
             <td>'.$status.'</td>
-            <td>R$'.number_format(calcMulta($dataFinal, $valor, $ID), 2, ',', '.').'</td>
+            <td>R$ '.number_format(calcMulta($dataFinal, $valor, $ID), 2, ',', '.').'</td>
             <td>'.calcDias($dataFinal).'</td>
-            <td>
-              <div class="table-data-feature">
-                <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value='.$ID.'>
-                  <i class="fa fa-clock-o"></i>&nbsp;Adiar
-                </button>
-                <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value='.$ID.'>
-                  <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                </button>
-              </div>
-            </td>
-          </tr>';
+            <td>';
+            if(calcDias($dataFinal) > 0){
+              echo '<div class="table-data-feature">
+                      <button onclick="trocar('.$ID.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal">
+                        <i class="fa fa-clock-o"></i>&nbsp;Adiar
+                      </button>
+                      <button onclick="trocar('.$ID.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete">
+                        <i class="fa fa-times-circle"></i>&nbsp;Cancelar
+                      </button>
+                    </div>
+                  </td>
+                </tr>';
+            }else{
+              echo '<div class="table-data-feature">
+                      <button onclick="trocar('.$ID.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete">
+                        <i class="fa fa-times-circle"></i>&nbsp;Cancelar
+                      </button>
+                    </div>
+                  </td>
+                </tr>';
+            }
+              
   }
 }
 

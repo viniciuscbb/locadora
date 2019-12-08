@@ -59,7 +59,7 @@ function getNascimento()
     $busca = "SELECT data_nascimento FROM cliente WHERE id_cliente='$id'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['data_nascimento'];
+    return date("d/m/Y", strtotime($retorno['data_nascimento']));
 }
 
 if (isset($_POST['btnSalvar'])) {

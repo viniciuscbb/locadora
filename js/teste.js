@@ -1,8 +1,6 @@
-function trocar(){
-  const btnModal = document.getElementById('btnModal');
-  const btnDelete = document.getElementById('btnDelete');
+function trocar(id){
   const inputModal = document.getElementById('inputModal');
   const inputModalCancelar = document.getElementById('inputModalCancelar');
-  inputModal.value = btnModal.value;
-  inputModalCancelar.value = btnDelete.value;
+  inputModal.value = id;
+  inputModalCancelar.value = id;
 }
