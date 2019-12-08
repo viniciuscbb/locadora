@@ -269,7 +269,7 @@ function getDebito()
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php echo mostraListaAluguel(); ?>
+                                        <?php echo mostraListaAluguel(UserID()); ?>
                                     </tbody>
                                 </table>
                             </div>

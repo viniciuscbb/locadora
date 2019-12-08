@@ -40,10 +40,10 @@ function calcMulta($dataFinal, $valor){
   return $multa;
 }
 
-function mostraListaAluguel(){
+function mostraListaAluguel($ID){
   $conection = conection();
   
-  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = 1 and status = 'aberto'");
+  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID' and status = 'aberto'");
   
   while($row = mysqli_fetch_array($query)){
     $ID = $row['id_aluguel'];
