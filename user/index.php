@@ -4,6 +4,7 @@ include('../functions.php');
 administrador(UserID());
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -237,9 +238,9 @@ administrador(UserID());
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            <input type="hidden" name="inputCodigoAdiar" id="inputModalAdiar" class="form-control-success form-control" value="0">
+                            <input type="hidden" name="inputCodigoAdiar" id="inputModal" class="form-control-success form-control" value="">
                             <label for="inputSuccess2i" class=" form-control-label">Adiar por mais quantos dias?</label>
-                            <input type="number" id="inputSuccess2i" class="form-control-success form-control" value="0">
+                            <input type="number" name="inputDias" id="inputSuccess2i" class="form-control-success form-control" value="">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -308,15 +309,32 @@ administrador(UserID());
 if (isset($_POST['btnCancelar'])) {
     $conection = conection();
     $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
-    echo $inputCodigo;
     $query = mysqli_query($conection, "DELETE FROM aluguel WHERE id_aluguel = '$inputCodigo'");
     if ($query) {
         echo "<script language='javascript' type='text/javascript'>
-          alert('Alguel cancelado!');
+          alert('Contrato cancelado!');window.location = ('index.php');
          </script>";
     } else {
         echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
     }
 }
 
+if (isset($_POST['btnAdiar'])) {
+    $conection = conection();
+    $inputCodigoAdiar = mysqli_real_escape_string($conection, $_POST['inputCodigoAdiar']);
+    $inputDias = mysqli_real_escape_string($conection, $_POST['inputDias']);
+    $busca = "SELECT * FROM aluguel WHERE id_aluguel='$inputCodigoAdiar'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    $data = $retorno['data_vencimento'];
+    $data   = date('Y-m-d', strtotime($data. " + ".$inputDias." days"));
+    $result = mysqli_query($conection, "UPDATE aluguel SET data_vencimento='$data', status='Aberto' WHERE id_aluguel='$inputCodigoAdiar'");
+    if ($result) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Adiado com sucesso!');window.location = ('index.php');
+         </script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Erro ao adiar');</script>";
+    }
+}
 ?>
