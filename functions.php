@@ -12,28 +12,65 @@ function conection(){
   }
 }
 
+function calcDias($dataFinal){
+    $dataInicial = date('Y-m-d');
+    $time_inicial = strtotime($dataInicial);
+    $time_final = strtotime($dataFinal);
+    $diferenca = $time_final - $time_inicial;
+    $dias = (int) floor($diferenca / (60 * 60 * 24));
+    $diasRestantes   = $dias; 
+    if($diasRestantes < 1){
+      $dias = 0;
+    }
+    return $dias; 
+}
+
+function calcMulta($dataFinal, $valor){
+  if(calcDias($dataFinal) < 1){
+    $dataInicial = date('Y-m-d');
+    $time_inicial = strtotime($dataInicial);
+    $time_final = strtotime($dataFinal);
+    $diferenca = $time_final - $time_inicial;
+    $dias = (int) floor($diferenca / (60 * 60 * 24));
+    $diasRestantes   = $dias;
+    $multa = $valor + (abs($diasRestantes) * ($valor * 2/100));
+  }else{
+    $multa = 0;
+  }
+  return $multa;
+}
+
 function mostraListaAluguel(){
   $conection = conection();
   
   $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = 1 and status = 'aberto'");
   
   while($row = mysqli_fetch_array($query)){
-    $modelo     = $row['nome'];
-    $dataInicial = $row['telefone'];
-    $dataFinal    = $row['email'];
-    $valor   = $row['cidade'];
-    $status   = $row['estado'];
-    $multa   = $row['estado'];
-    $diasRestantes   = $row['estado'];
-    echo '<tr>
-            <th scope="row">'.$id.'</th>
-              <td>'.$nome.'</td>
-              <td style="white-space: nowrap">'.$telefone.'</td>
-              <td>'.$email.'</td>
-              <td>'.$cidade.' - '.$estado.'</td>
-              <td>'.$curso.'</td>
-              <td><a href="editar.php?id='.$id.'" title="Clique aqui para editar">
-                  <span class="badge badge-info">EDITAR</span></a></td>
+    $ID = $row['id_aluguel'];
+    $modelo     = $row['modelo'];
+    $dataInicial = $row['data_aluguel'];
+    $dataFinal    = $row['data_vencimento'];
+    $valor   = $row['valor'];
+    $status   = $row['status'];
+    
+    echo '<tr  class="tr-shadow">
+            <td>'.$modelo.'</td>
+            <td>'.$dataInicial.'</td>
+            <td>'.$dataFinal.'</td>
+            <td>R$'.number_format($valor, 2, ',', '.').'</td>
+            <td>'.$status.'</td>
+            <td>R$'.number_format(calcMulta($dataFinal, $valor), 2, ',', '.').'</td>
+            <td>'.calcDias($dataFinal).'</td>
+            <td>
+              <div class="table-data-feature">
+                <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value='.$ID.'>
+                  <i class="fa fa-clock-o"></i>&nbsp;Adiar
+                </button>
+                <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value='.$ID.'>
+                  <i class="fa fa-times-circle"></i>&nbsp;Cancelar
+                </button>
+              </div>
+            </td>
           </tr>';
   }
 }

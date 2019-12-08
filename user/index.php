@@ -1,13 +1,5 @@
 <?php
 include('../functions.php');
-/*
-$data_inicial =  date('Y-m-d');
-$data_final = "2019-11-15";
-$time_inicial = strtotime($data_inicial);
-$time_final = strtotime($data_final);
-$diferenca = $time_final - $time_inicial;
-$dias = (int) floor($diferenca / (60 * 60 * 24));
-*/
 
 function UserID()
 {
@@ -277,29 +269,7 @@ function getDebito()
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="tr-shadow">
-                                            <?php
-                                            $ID = 15155;
-                                            ?>
-                                            <td>Gol</td>
-                                            <td>08-11-2019</td>
-                                            <td>10-11-2019</td>
-                                            <td>R$679.00</td>
-                                            <td>
-                                                <span class="status--process">Aberto</span>
-                                            </td>
-                                            <td>R$0.00</td>
-                                            <td>1 Dia(s)</td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>>
-                                                        <i class="fa fa-clock-o"></i>&nbsp;Adiar
-                                                    </button>
-                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>>
-                                                        <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                                                    </button>
-                                                </div>
-                                            </td>
+                                        <?php echo mostraListaAluguel(); ?>
                                     </tbody>
                                 </table>
                             </div>
