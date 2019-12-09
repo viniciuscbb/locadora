@@ -52,35 +52,22 @@ function getDebito()
 {
   $id = UserID();
   $conection = conection();
-  $busca = "SELECT sum(valor) as total FROM aluguel WHERE id_cliente='$id'";
-  $identificacao = mysqli_query($conection, $busca);
-  $retorno = mysqli_fetch_array($identificacao);
-  $valor = $retorno['total'];
-
-  $busca = "SELECT data_vencimento FROM aluguel WHERE id_cliente='$id'";
-  $identificacao = mysqli_query($conection, $busca);
-  $retorno = mysqli_fetch_array($identificacao);
-  $dataFinal = $retorno['data_vencimento'];
-
-  $busca = "SELECT data_aluguel FROM aluguel WHERE id_cliente='$id'";
-  $identificacao = mysqli_query($conection, $busca);
-  $retorno = mysqli_fetch_array($identificacao);
-  $dataInicial = $retorno['data_aluguel'];
-
-  $time_inicial = strtotime($dataInicial);
-  $time_final = strtotime($dataFinal);
-  $diferenca = $time_final - $time_inicial;
-  $dias = (int) floor($diferenca / (60 * 60 * 24));
-  $diasRestantes = $dias;
-  if ($diasRestantes < 1) {
-    $dias = 0;
+  $query = mysqli_query($conection, "SELECT TIMESTAMPDIFF(DAY, data_aluguel, data_vencimento) as total, valor from aluguel where id_cliente = '$id'");
+  $calculo = 0;
+  while ($row = mysqli_fetch_array($query)) {
+    $dias = $row['total'];
+    $valor = $row['valor'];
+    $calculo = $calculo + $dias * $valor;
   }
   
   $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id' and status = 'Vencido'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
   $multa = $retorno['multa'];
-  $resultado = $dias * $valor + $multa;
+  $resultado = $calculo + $multa;
+
+  $busca = "UPDATE cliente SET debito = '$resultado' where id_cliente = '$id'";
+    if (mysqli_query($conection, $busca)) { }
 
   $result = number_format($resultado, 2, ',', '.');
   return $result;
