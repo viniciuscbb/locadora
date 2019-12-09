@@ -31,7 +31,7 @@ function getModelo($id_carro){
 function listaAdm(){
       
   $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from aluguel");
+  $query = mysqli_query($conection, "SELECT * from aluguel order by status");
 
     while ($row = mysqli_fetch_array($query)) {
         $id_aluguel      = $row['id_aluguel'];
@@ -61,16 +61,24 @@ function listaAdm(){
                 <td>'.$status.'</td>
                 <td>R$ ' . number_format($multa, 2, ',', '.') . '</td>
                 <td>'.calcDiasRestantes($data_aluguel, $data_vencimento).'</td>
-                <td>
-                    <div class="table-data-feature">
-                        <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
-                            <i class="fa fa-clock-o"></i>&nbsp;Dados
-                        </button>
-                        <button onclick="trocar('.$id_aluguel.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
-                            <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                        </button>
-                    </div>
-                </td>
+                <td>';
+                if($status == '<span class="status--denied">Fechado</span>'){
+                    echo '<div class="table-data-feature">
+                            <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+                                <i class="fa fa-clock-o"></i>&nbsp;Dados
+                            </button>
+                        </div>';
+                }else{
+                    echo '<div class="table-data-feature">
+                            <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+                                <i class="fa fa-clock-o"></i>&nbsp;Dados
+                            </button>
+                            <button onclick="trocar('.$id_aluguel.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
+                                <i class="fa fa-times-circle"></i>&nbsp;Cancelar
+                            </button>
+                        </div>';
+                }
+            echo '</td>
             </tr>';
         
     }
