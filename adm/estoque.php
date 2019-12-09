@@ -21,6 +21,57 @@ if (isset($_POST['btnAdicionar'])) {
         echo "<script language='javascript' type='text/javascript'>alert('Dados incorretos');window.location.href='login.php';</script>";
     }
 }
+
+function status($id_carro){
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT * FROM aluguel WHERE id_carro = '$id_carro'");
+    $resultado = mysqli_num_rows($query);
+    if($resultado >= 1){
+        $status = "<td class='denied'>Alugado</td>";
+    } else {	
+        $status = "<td class='process'>Disponível</td>";
+    }
+    return $status;
+}
+
+function mostraEstoque(){
+        
+  $conection = conection();
+  $query = mysqli_query($conection, "SELECT * from carro");
+
+    while ($row = mysqli_fetch_array($query)) {
+        $id_carro        = $row['id_carro'];
+        $modelo          = $row['modelo'];
+        $motor           = $row['motor'];
+        $cambio          = $row['cambio'];
+        $ar_condicionado = $row['ar_condicionado'];
+        $passageiros     = $row['passageiros'];
+        $portas          = $row['portas'];
+        $direcao         = $row['direcao'];
+        $valor           = $row['valor'];
+        if ($ar_condicionado == 1) {
+            $ar_condicionado = '<span class="status--process">Sim</span>';
+        }else {
+            $ar_condicionado = '<span class="status--denied">Não</span>';
+        }
+
+        $status = status($id_carro);
+
+        echo '<tr>
+                <td>'.$modelo.'</td>
+                <td>'.number_format($motor, 1,).'</td>
+                <td>'.$cambio .'</td>
+                <td>'.$ar_condicionado.'</td>
+                <td>'.$passageiros.'</td>
+                <td>'.$portas.'</td>
+                <td>'.$direcao.'</td>
+                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
+                '.$status.'
+            </tr>';
+        
+    }
+}
+
 ?>
 
 
@@ -187,28 +238,7 @@ if (isset($_POST['btnAdicionar'])) {
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Argor</td>
-                                            <td>1.0</td>
-                                            <td>Manual</td>
-                                            <td>Sim</td>
-                                            <td>5</td>
-                                            <td>4</td>
-                                            <td>Assistida</td>
-                                            <td>666</td>
-                                            <td class="denied">Alugado</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Fiat</td>
-                                            <td>1.8</td>
-                                            <td>Automático</td>
-                                            <td>Sim</td>
-                                            <td>5</td>
-                                            <td>4</td>
-                                            <td>Assistida</td>
-                                            <td>220</td>
-                                            <td class="process">Disponível</td>
-                                        </tr>
+                                        <?php echo mostraEstoque(); ?>
                                     </tbody>
                                 </table>
                             </div>

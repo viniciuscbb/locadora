@@ -79,12 +79,12 @@ function mostraListaAluguel($ID)
   $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID'");
 
   while ($row = mysqli_fetch_array($query)) {
-    $ID = $row['id_aluguel'];
-    $modelo     = $row['modelo'];
+    $ID          = $row['id_aluguel'];
+    $modelo      = $row['modelo'];
     $dataInicial = $row['data_aluguel'];
-    $dataFinal    = $row['data_vencimento'];
-    $valor   = $row['valor'];
-    $status   = $row['status'];
+    $dataFinal   = $row['data_vencimento'];
+    $valor       = $row['valor'];
+    $status      = $row['status'];
     if ($status == "Vencido") {
       $status = '<span class="status--denied">Vencido</span>';
     } else if ($status == "Aberto") {

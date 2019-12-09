@@ -1,6 +1,295 @@
 <?php
 include('../functions.php');
 
+function calcDiasRestantes($dataInicial, $dataFinal)
+{
+  $time_inicial = strtotime($dataInicial);
+  $time_final = strtotime($dataFinal);
+  $diferenca = $time_final - $time_inicial;
+  $dias = (int) floor($diferenca / (60 * 60 * 24));
+  $diasRestantes   = $dias;
+  if ($diasRestantes < 1) {
+    $dias = 0;
+  }
+  return $dias;
+}
+
+function getNome($id_cliente){
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT nome from cliente where id_cliente = '$id_cliente'");
+    $retorno = mysqli_fetch_array($query);
+     return $retorno['nome'];
+}
+
+function getModelo($id_carro){
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT modelo from carro where id_carro = '$id_carro'");
+    $retorno = mysqli_fetch_array($query);
+    return $retorno['modelo'];
+}
+
+function listaAdm(){
+      
+  $conection = conection();
+  $query = mysqli_query($conection, "SELECT * from aluguel");
+
+    while ($row = mysqli_fetch_array($query)) {
+        $id_aluguel      = $row['id_aluguel'];
+        $id_cliente      = $row['id_cliente'];
+        $id_carro        = $row['id_carro'];
+        $data_aluguel    = $row['data_aluguel'];
+        $valor           = $row['valor'];
+        $status          = $row['status'];
+        $multa           = $row['multa'];
+        $data_vencimento = $row['data_vencimento'];
+
+        $nome = getNome($id_cliente);
+        $modelo = getModelo($id_carro);
+
+        if ($status == "Vencido") {
+            $status = '<span class="status--denied">Vencido</span>';
+          } else if ($status == "Aberto") {
+            $status = '<span class="status--process">Aberto</span>';
+          }else {
+            $status = '<span class="status--denied">Fechado</span>';
+          }
+        echo '<tr class="tr-shadow">
+                <td>'.$nome.'</td>
+                <td>'.$modelo.'</td>
+                <td class="desc">'.date("d/m/Y", strtotime($data_aluguel)).'</td>
+                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
+                <td>'.$status.'</td>
+                <td>R$ ' . number_format($multa, 2, ',', '.') . '</td>
+                <td>'.calcDiasRestantes($data_aluguel, $data_vencimento).'</td>
+                <td>
+                    <div class="table-data-feature">
+                        <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+                            <i class="fa fa-clock-o"></i>&nbsp;Dados
+                        </button>
+                        <button onclick="trocar('.$id_aluguel.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
+                            <i class="fa fa-times-circle"></i>&nbsp;Cancelar
+                        </button>
+                    </div>
+                </td>
+            </tr>';
+        
+    }
+}
+
+function graficoMes(){
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT SUM(CASE WHEN (MONTH(data_aluguel) = 1) THEN 1 ELSE 0 END) Jan, SUM(CASE WHEN (MONTH(data_aluguel) = 2) THEN 1 ELSE 0 END) Fev, SUM(CASE WHEN (MONTH(data_aluguel) = 3) THEN 1 ELSE 0 END) Mar, SUM(CASE WHEN (MONTH(data_aluguel) = 4) THEN 1 ELSE 0 END) Abr, SUM(CASE WHEN (MONTH(data_aluguel) = 5) THEN 1 ELSE 0 END) Mai, SUM(CASE WHEN (MONTH(data_aluguel) = 6) THEN 1 ELSE 0 END) Jun, SUM(CASE WHEN (MONTH(data_aluguel) = 7) THEN 1 ELSE 0 END) Jul,SUM(CASE WHEN (MONTH(data_aluguel) = 8) THEN 1 ELSE 0 END) Ago, SUM(CASE WHEN (MONTH(data_aluguel) = 9) THEN 1 ELSE 0 END) Sete, SUM(CASE WHEN (MONTH(data_aluguel) = 10) THEN 1 ELSE 0 END) Outu, SUM(CASE WHEN (MONTH(data_aluguel) = 11) THEN 1 ELSE 0 END) Nov, SUM(CASE WHEN (MONTH(data_aluguel) = 12) THEN 1 ELSE 0 END) Dez from aluguel");
+    $retorno = mysqli_fetch_array($query);
+    $Jan  = $retorno['Jan'];
+    $Fev  = $retorno['Fev'];
+    $Mar  = $retorno['Mar'];
+    $Abr  = $retorno['Abr'];
+    $Mai  = $retorno['Mai'];
+    $Jun  = $retorno['Jun'];
+    $Jul  = $retorno['Jul'];
+    $Ago  = $retorno['Ago'];
+    $Sete = $retorno['Sete'];
+    $Outu = $retorno['Outu'];
+    $Nov  = $retorno['Nov'];
+    $Dez  = $retorno['Dez'];
+
+    $query = mysqli_query($conection, "SELECT SUM(CASE WHEN (YEAR(data_aluguel) = 2015) THEN 1 ELSE 0 END) a2015,  SUM(CASE WHEN (YEAR (data_aluguel) = 2016) THEN 1 ELSE 0 END) a2016,  SUM(CASE WHEN (YEAR (data_aluguel) = 2017) THEN 1 ELSE 0 END) a2017,  SUM(CASE WHEN (YEAR (data_aluguel) = 2018) THEN 1 ELSE 0 END) a2018,  SUM(CASE WHEN (YEAR (data_aluguel) = 2019) THEN 1 ELSE 0 END) a2019 FROM aluguel");
+    $retorno = mysqli_fetch_array($query);
+    $a2015  = $retorno['a2015'];
+    $a2016  = $retorno['a2016'];
+    $a2017  = $retorno['a2017'];
+    $a2018  = $retorno['a2018'];
+    $a2019  = $retorno['a2019'];
+
+
+    echo "<script language='javascript' type='text/javascript'>
+    (function ($) {
+      // USE STRICT
+      'use strict';
+    
+      try {
+        //Gráfico do mês
+        var ctx = document.getElementById('sales-chart');
+        if (ctx) {
+          ctx.height = 150;
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+              type: 'line',
+              defaultFontFamily: 'Poppins',
+              datasets: [{
+                label: 'Alugueis',
+                data: [".$Jan.", ".$Fev.", ".$Mar.", ".$Abr.", ".$Mai.", ".$Jun.", ".$Jul.", ".$Ago.", ".$Sete.", ".$Outu.", ".$Nov.", ".$Dez."],
+                backgroundColor: 'transparent',
+                borderColor: 'rgba(255, 118, 117,1.0)',
+                borderWidth: 3,
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointBorderColor: 'transparent',
+                pointBackgroundColor: 'rgba(220,53,69,0.75)',
+              }]
+            },
+            options: {
+              responsive: true,
+              tooltips: {
+                mode: 'index',
+                titleFontSize: 12,
+                titleFontColor: '#000',
+                bodyFontColor: '#000',
+                backgroundColor: '#fff',
+                titleFontFamily: 'Poppins',
+                bodyFontFamily: 'Poppins',
+                cornerRadius: 3,
+                intersect: false,
+              },
+              legend: {
+                display: false,
+                labels: {
+                  usePointStyle: true,
+                  fontFamily: 'Poppins',
+                },
+              },
+              scales: {
+                xAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  scaleLabel: {
+                    display: false,
+                    labelString: 'Month'
+                  },
+                  ticks: {
+                    fontFamily: 'Poppins'
+                  }
+                }],
+                yAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Quantidades',
+                    fontFamily: 'Poppins'
+    
+                  },
+                  ticks: {
+                    fontFamily: 'Poppins'
+                  }
+                }]
+              },
+              title: {
+                display: false,
+                text: 'Normal Legend'
+              }
+            }
+          });
+        }
+    
+    
+      } catch (error) {
+        console.log(error);
+      }
+    
+      try {
+    
+        //Grafico do ano
+        var ctx = document.getElementById('team-chart');
+        if (ctx) {
+          ctx.height = 150;
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['2015', '2016', '2017', '2018', '2019'],
+              type: 'line',
+              defaultFontFamily: 'Poppins',
+              datasets: [{
+                data: [".$a2015.", ".$a2016.", ".$a2017.", ".$a2018.", ".$a2019."],
+                label: 'Alugueis',
+                backgroundColor: 'rgba(0,103,255,.15)',
+                borderColor: 'rgba(0,103,255,0.5)',
+                borderWidth: 3.5,
+                pointStyle: 'circle',
+                pointRadius: 5,
+                pointBorderColor: 'transparent',
+                pointBackgroundColor: 'rgba(0,103,255,0.5)',
+              },]
+            },
+            options: {
+              responsive: true,
+              tooltips: {
+                mode: 'index',
+                titleFontSize: 12,
+                titleFontColor: '#000',
+                bodyFontColor: '#000',
+                backgroundColor: '#fff',
+                titleFontFamily: 'Poppins',
+                bodyFontFamily: 'Poppins',
+                cornerRadius: 3,
+                intersect: false,
+              },
+              legend: {
+                display: false,
+                position: 'top',
+                labels: {
+                  usePointStyle: true,
+                  fontFamily: 'Poppins',
+                },
+    
+    
+              },
+              scales: {
+                xAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  scaleLabel: {
+                    display: false,
+                    labelString: 'Month'
+                  },
+                  ticks: {
+                    fontFamily: 'Poppins'
+                  }
+                }],
+                yAxes: [{
+                  display: true,
+                  gridLines: {
+                    display: false,
+                    drawBorder: false
+                  },
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Quantidades',
+                    fontFamily: 'Poppins'
+                  },
+                  ticks: {
+                    fontFamily: 'Poppins'
+                  }
+                }]
+              },
+              title: {
+                display: false,
+              }
+            }
+          });
+        }
+    
+    
+      } catch (error) {
+        console.log(error);
+      }
+    
+    })(jQuery);
+    </script>
+    ";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -114,7 +403,7 @@ include('../functions.php');
                                     <span class="au-breadcrumb-span">Você está aqui:</span>
                                     <ul class="list-unstyled list-inline au-breadcrumb__list">
                                         <li class="list-inline-item active">
-                                            <a href="#">Inicio</a>
+                                            <a href="index.php">Inicio</a>
                                         </li>
                                         <li class="list-inline-item seprate">
                                             <span>/</span>
@@ -205,29 +494,7 @@ include('../functions.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="tr-shadow">
-                                            <?php
-                                            $ID = 15155;
-                                            ?>
-                                            <td>Fernando</td>
-                                            <td>Gol</td>
-                                            <td>10-11-2019</td>
-                                            <td>R$679.00</td>
-                                            <td>
-                                                <span class="status--process">Aberto</span>
-                                            </td>
-                                            <td>R$0.00</td>
-                                            <td>1 Dia(s)</td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>>
-                                                        <i class="fa fa-clock-o"></i>&nbsp;Dados
-                                                    </button>
-                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>>
-                                                        <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                                                    </button>
-                                                </div>
-                                            </td>
+                                        <?php echo listaAdm(); ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -267,8 +534,7 @@ include('../functions.php');
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                            <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled>
+                            <input type="hidden" id="inputModal" class="form-control-success form-control" value="">
                             <label for="inputSuccess2i" class=" form-control-label">Nome</label>
                             <input type="text" id="inputNome" class="form-control-success form-control" value="Fernando" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
@@ -300,7 +566,7 @@ include('../functions.php');
                     </div>
                     <div class="modal-body">
                         <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                        <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+                        <input type="hidden" id="inputModalCancelar" class="form-control-success form-control" value="">
                         <p>
                             Você tem certeza que realmente deseja cancelar esse contrato?
                         </p>
@@ -336,6 +602,7 @@ include('../functions.php');
     </script>
 
     <!-- Main JS-->
+    <?php echo graficoMes(); ?>
     <script src="../js/main.js"></script>
     <script src="../js/teste.js"></script>
 

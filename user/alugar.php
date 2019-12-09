@@ -1,5 +1,73 @@
 <?php
 include('../functions.php');
+
+function listaAlugar(){
+    
+  $conection = conection();
+  $query = mysqli_query($conection, "SELECT * from carro");
+
+    while ($row = mysqli_fetch_array($query)) {
+        $ID              = $row['id_carro'];
+        $modelo          = $row['modelo'];
+        $motor           = $row['motor'];
+        $cambio          = $row['cambio'];
+        $ar_condicionado = $row['ar_condicionado'];
+        $passageiros     = $row['passageiros'];
+        $portas          = $row['portas'];
+        $direcao         = $row['direcao'];
+        $valor           = $row['valor'];
+        if ($ar_condicionado == 1) {
+        $ar_condicionado = '<span class="status--process">Sim</span>';
+        }else {
+        $ar_condicionado = '<span class="status--denied">Não</span>';
+        }
+
+        echo '<tr class="tr-shadow">
+                <td>'.$modelo.'</td>
+                <td>'.number_format($motor, 1,).'</td>
+                <td class="desc">'.$cambio .'</td>
+                <td>'.$ar_condicionado.'</td>
+                <td>'.$passageiros.'</td>
+                <td>'.$portas.'</td>
+                <td><span class="block-email">'.$direcao.'</span></td>
+                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
+                <td>
+                    <div class="table-data-feature">
+                        <button onclick="trocarAlugar('.$ID.')" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
+                            <i class="fa fa-car"></i>&nbsp;Foto
+                        </button>
+                        <button onclick="trocarAlugar('.$ID.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-success btn-sm" id="btnDelete">
+                            <i class="fa fa-calendar-check-o"></i>&nbsp;Alugar
+                        </button>
+                    </div>
+                </td>
+            </tr>';
+        
+    }
+}
+
+if (isset($_POST['btnAlugar'])) {
+    $conection = conection();
+    $id_cliente = UserID();
+    $id_carro = mysqli_real_escape_string($conection, $_POST['inputModalCancelar']);
+    $query = mysqli_query($conection, "SELECT * from carro where id_carro = '$id_carro'");
+    $retorno = mysqli_fetch_array($query);
+    $valor = $retorno['valor'];
+    $status = "Aberto";
+    $data_devolucao = mysqli_real_escape_string($conection, $_POST['data_devolucao']);
+    $data_aluguel = date('Y-m-d');
+    $query = mysqli_query($conection, "INSERT INTO aluguel (data_aluguel, data_vencimento, id_carro, id_cliente, valor, status, multa) VALUES ('$data_aluguel', '$data_devolucao', '$id_carro', '$id_cliente', '$valor', '$status', 0)");
+    if ($query) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Aluguel realizado com sucesso');
+         </script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Erro ao alugar');</script>";
+    }
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -166,29 +234,7 @@ include('../functions.php');
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="tr-shadow">
-
-                                            <td>Argo</td>
-                                            <td>1.0</td>
-                                            <td class="desc">Manual</td>
-                                            <td>
-                                                <span class="status--process">Sim</span>
-                                            </td>
-                                            <td>5</td>
-                                            <td>4</td>
-                                            <td><span class="block-email">Assistida</span></td>
-                                            <td>R$130/dia</td>
-                                            <td>
-                                                <div class="table-data-feature">
-                                                    <button onclick="trocar()" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
-                                                        <i class="fa fa-car"></i>&nbsp;Foto
-                                                    </button>
-                                                    <button onclick="trocar()" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-success btn-sm" id="btnDelete">
-                                                        <i class="fa fa-calendar-check-o"></i>&nbsp;Alugar
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        <?php echo listaAlugar(); ?>
                                         <tr class="spacer"></tr>
                                         </tr>
                                     </tbody>
@@ -229,8 +275,8 @@ include('../functions.php');
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            <input type="number" id="inputModal" class="form-control-success form-control" value="0" disabled style="display:none">
-                            <img src="../images/carros/argo.jpg" alt="CoolAdmin" />
+                            
+                            <img src="#" id="imgCarro" alt="CoolAdmin" />
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -245,21 +291,24 @@ include('../functions.php');
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="smallmodalLabel">Cancelar contrato</h5>
+                        <h5 class="modal-title" id="smallmodalLabel">Realizar novo aluguel</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                        <input type="number" id="inputModalCancelar" class="form-control-success form-control" value="0" disabled>
+                        <input type="hidden" name="inputModalCancelar" id="inputModalCancelar" class="form-control-success form-control" value="">
+                        <div class="form-group">
+                            <label>Data de devolução</label>
+                                <input class="au-input au-input--full" type="date" name="data_devolucao" placeholder="">
+                        </div>
                         <p>
                             Ao clicar em confirmar você está concordando com os <a href="../termos.html" target="_blank">termos e condições</a>.
                         </p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" name="btnCancelar" class="btn btn-primary">Confirmar</button>
+                        <button type="submit" name="btnAlugar" class="btn btn-primary">Confirmar</button>
                     </div>
                 </div>
             </div>
@@ -290,6 +339,7 @@ include('../functions.php');
 
     <!-- Main JS-->
     <script src="../js/main.js"></script>
+    <script src="../js/teste.js"></script>
 
 </body>
 
