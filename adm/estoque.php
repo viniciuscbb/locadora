@@ -22,22 +22,24 @@ if (isset($_POST['btnAdicionar'])) {
     }
 }
 
-function status($id_carro){
+function status($id_carro)
+{
     $conection = conection();
     $query = mysqli_query($conection, "SELECT * FROM aluguel WHERE id_carro = '$id_carro'");
     $resultado = mysqli_num_rows($query);
-    if($resultado >= 1){
+    if ($resultado >= 1) {
         $status = "<td class='denied'>Alugado</td>";
-    } else {	
+    } else {
         $status = "<td class='process'>Disponível</td>";
     }
     return $status;
 }
 
-function mostraEstoque(){
-        
-  $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from carro");
+function mostraEstoque()
+{
+
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT * from carro");
 
     while ($row = mysqli_fetch_array($query)) {
         $id_carro        = $row['id_carro'];
@@ -51,24 +53,23 @@ function mostraEstoque(){
         $valor           = $row['valor'];
         if ($ar_condicionado == 1) {
             $ar_condicionado = '<span class="status--process">Sim</span>';
-        }else {
+        } else {
             $ar_condicionado = '<span class="status--denied">Não</span>';
         }
 
         $status = status($id_carro);
 
         echo '<tr>
-                <td>'.$modelo.'</td>
-                <td>'.number_format($motor, 1,).'</td>
-                <td>'.$cambio .'</td>
-                <td>'.$ar_condicionado.'</td>
-                <td>'.$passageiros.'</td>
-                <td>'.$portas.'</td>
-                <td>'.$direcao.'</td>
-                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
-                '.$status.'
+                <td>' . $modelo . '</td>
+                <td>' . number_format($motor, 1) . '</td>   
+                <td>' . $cambio . '</td>
+                <td>' . $ar_condicionado . '</td>
+                <td>' . $passageiros . '</td>
+                <td>' . $portas . '</td>
+                <td>' . $direcao . '</td>
+                <td>R$ ' . number_format($valor, 2, ',', '.') . ' / dia</td>
+                ' . $status . '
             </tr>';
-        
     }
 }
 

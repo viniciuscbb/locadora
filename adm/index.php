@@ -3,35 +3,38 @@ include('../functions.php');
 
 function calcDiasRestantes($dataInicial, $dataFinal)
 {
-  $time_inicial = strtotime($dataInicial);
-  $time_final = strtotime($dataFinal);
-  $diferenca = $time_final - $time_inicial;
-  $dias = (int) floor($diferenca / (60 * 60 * 24));
-  $diasRestantes   = $dias;
-  if ($diasRestantes < 1) {
-    $dias = 0;
-  }
-  return $dias;
+    $time_inicial = strtotime($dataInicial);
+    $time_final = strtotime($dataFinal);
+    $diferenca = $time_final - $time_inicial;
+    $dias = (int) floor($diferenca / (60 * 60 * 24));
+    $diasRestantes   = $dias;
+    if ($diasRestantes < 1) {
+        $dias = 0;
+    }
+    return $dias;
 }
 
-function getNome($id_cliente){
+function getNome($id_cliente)
+{
     $conection = conection();
     $query = mysqli_query($conection, "SELECT nome from cliente where id_cliente = '$id_cliente'");
     $retorno = mysqli_fetch_array($query);
-     return $retorno['nome'];
+    return $retorno['nome'];
 }
 
-function getModelo($id_carro){
+function getModelo($id_carro)
+{
     $conection = conection();
     $query = mysqli_query($conection, "SELECT modelo from carro where id_carro = '$id_carro'");
     $retorno = mysqli_fetch_array($query);
     return $retorno['modelo'];
 }
 
-function listaAdm(){
-      
-  $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from aluguel order by status");
+function listaAdm()
+{
+
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT * from aluguel order by status");
 
     while ($row = mysqli_fetch_array($query)) {
         $id_aluguel      = $row['id_aluguel'];
@@ -48,43 +51,43 @@ function listaAdm(){
 
         if ($status == "Vencido") {
             $status = '<span class="status--denied">Vencido</span>';
-          } else if ($status == "Aberto") {
+        } else if ($status == "Aberto") {
             $status = '<span class="status--process">Aberto</span>';
-          }else {
+        } else {
             $status = '<span class="status--denied">Fechado</span>';
-          }
+        }
         echo '<tr class="tr-shadow">
-                <td>'.$nome.'</td>
-                <td>'.$modelo.'</td>
-                <td class="desc">'.date("d/m/Y", strtotime($data_aluguel)).'</td>
-                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
-                <td>'.$status.'</td>
+                <td>' . $nome . '</td>
+                <td>' . $modelo . '</td>
+                <td class="desc">' . date("d/m/Y", strtotime($data_aluguel)) . '</td>
+                <td>R$ ' . number_format($valor, 2, ',', '.') . ' / dia</td>
+                <td>' . $status . '</td>
                 <td>R$ ' . number_format($multa, 2, ',', '.') . '</td>
-                <td>'.calcDiasRestantes($data_aluguel, $data_vencimento).'</td>
+                <td>' . calcDiasRestantes($data_aluguel, $data_vencimento) . '</td>
                 <td>';
-                if($status == '<span class="status--denied">Fechado</span>'){
-                    echo '<div class="table-data-feature">
-                            <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+        if ($status == '<span class="status--denied">Fechado</span>') {
+            echo '<div class="table-data-feature">
+                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
                                 <i class="fa fa-clock-o"></i>&nbsp;Dados
                             </button>
                         </div>';
-                }else{
-                    echo '<div class="table-data-feature">
-                            <button onclick="trocar('.$id_cliente.')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+        } else {
+            echo '<div class="table-data-feature">
+                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
                                 <i class="fa fa-clock-o"></i>&nbsp;Dados
                             </button>
-                            <button onclick="trocar('.$id_aluguel.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
+                            <button onclick="trocar(' . $id_aluguel . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
                                 <i class="fa fa-times-circle"></i>&nbsp;Cancelar
                             </button>
                         </div>';
-                }
-            echo '</td>
+        }
+        echo '</td>
             </tr>';
-        
     }
 }
 
-function graficoMes(){
+function graficoMes()
+{
     $conection = conection();
     $query = mysqli_query($conection, "SELECT SUM(CASE WHEN (MONTH(data_aluguel) = 1) THEN 1 ELSE 0 END) Jan, SUM(CASE WHEN (MONTH(data_aluguel) = 2) THEN 1 ELSE 0 END) Fev, SUM(CASE WHEN (MONTH(data_aluguel) = 3) THEN 1 ELSE 0 END) Mar, SUM(CASE WHEN (MONTH(data_aluguel) = 4) THEN 1 ELSE 0 END) Abr, SUM(CASE WHEN (MONTH(data_aluguel) = 5) THEN 1 ELSE 0 END) Mai, SUM(CASE WHEN (MONTH(data_aluguel) = 6) THEN 1 ELSE 0 END) Jun, SUM(CASE WHEN (MONTH(data_aluguel) = 7) THEN 1 ELSE 0 END) Jul,SUM(CASE WHEN (MONTH(data_aluguel) = 8) THEN 1 ELSE 0 END) Ago, SUM(CASE WHEN (MONTH(data_aluguel) = 9) THEN 1 ELSE 0 END) Sete, SUM(CASE WHEN (MONTH(data_aluguel) = 10) THEN 1 ELSE 0 END) Outu, SUM(CASE WHEN (MONTH(data_aluguel) = 11) THEN 1 ELSE 0 END) Nov, SUM(CASE WHEN (MONTH(data_aluguel) = 12) THEN 1 ELSE 0 END) Dez from aluguel");
     $retorno = mysqli_fetch_array($query);
@@ -128,7 +131,7 @@ function graficoMes(){
               defaultFontFamily: 'Poppins',
               datasets: [{
                 label: 'Alugueis',
-                data: [".$Jan.", ".$Fev.", ".$Mar.", ".$Abr.", ".$Mai.", ".$Jun.", ".$Jul.", ".$Ago.", ".$Sete.", ".$Outu.", ".$Nov.", ".$Dez."],
+                data: [" . $Jan . ", " . $Fev . ", " . $Mar . ", " . $Abr . ", " . $Mai . ", " . $Jun . ", " . $Jul . ", " . $Ago . ", " . $Sete . ", " . $Outu . ", " . $Nov . ", " . $Dez . "],
                 backgroundColor: 'transparent',
                 borderColor: 'rgba(255, 118, 117,1.0)',
                 borderWidth: 3,
@@ -216,7 +219,7 @@ function graficoMes(){
               type: 'line',
               defaultFontFamily: 'Poppins',
               datasets: [{
-                data: [".$a2015.", ".$a2016.", ".$a2017.", ".$a2018.", ".$a2019."],
+                data: [" . $a2015 . ", " . $a2016 . ", " . $a2017 . ", " . $a2018 . ", " . $a2019 . "],
                 label: 'Alugueis',
                 backgroundColor: 'rgba(0,103,255,.15)',
                 borderColor: 'rgba(0,103,255,0.5)',
@@ -297,6 +300,71 @@ function graficoMes(){
     </script>
     ";
 }
+
+if (isset($_POST['btnCancelar'])) {
+    $conection = conection();
+    $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
+    $query = mysqli_query($conection, "UPDATE aluguel SET status = 'Fechado' WHERE id_aluguel = '$inputCodigo'");
+    if ($query) {
+        echo "<script language='javascript' type='text/javascript'>
+          alert('Contrato cancelado!');window.location = ('index.php');
+         </script>";
+    } else {
+        echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
+    }
+}
+
+
+
+/*function getEndereco()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}
+
+function getCPF()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}
+
+function getNascimento()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}
+
+function getEmail()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}
+
+function getDebito()
+{
+    $id = UserID();
+    $conection = conection();
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];
+}*/
 
 ?>
 
@@ -536,15 +604,15 @@ function graficoMes(){
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticModalLabel">Dados do cliente</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" name="btnDados" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            <input type="hidden" id="inputModal" class="form-control-success form-control" value="">
+                            <input type="hidden" name="inputDados" id="inputModal" class="form-control-success form-control" value="">
                             <label for="inputSuccess2i" class=" form-control-label">Nome</label>
-                            <input type="text" id="inputNome" class="form-control-success form-control" value="Fernando" disabled>
+                            <input type="text" id="inputNome" class="form-control-success form-control" value="<?php echo getUserName2(); ?>" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
                             <input type="email" id="inputEmail" class="form-control-success form-control" value="fernando2019@hotmail.com" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">Endereço</label>
@@ -573,8 +641,7 @@ function graficoMes(){
                         </button>
                     </div>
                     <div class="modal-body">
-                        <label for="inputSuccess2i" class=" form-control-label">Código do contrato</label>
-                        <input type="hidden" id="inputModalCancelar" class="form-control-success form-control" value="">
+                        <input type="hidden" name="inputCodigo" id="inputModalCancelar" class="form-control-success form-control" value="">
                         <p>
                             Você tem certeza que realmente deseja cancelar esse contrato?
                         </p>
@@ -618,3 +685,22 @@ function graficoMes(){
 
 </html>
 <!-- end document-->
+<?php
+
+function getUserID()
+{
+    $conection = conection();
+    return mysqli_real_escape_string($conection, $_POST['inputDados']);
+}
+
+function getUserName2()
+{
+   echo getUserID();
+    $conection = conection();
+    /*$busca = "SELECT nome FROM cliente WHERE id_cliente='$id_cliente'";
+    $identificacao = mysqli_query($conection, $busca);
+    $retorno = mysqli_fetch_array($identificacao);
+    return $retorno['nome'];*/
+}
+
+?>
