@@ -1,7 +1,8 @@
 <?php
 include('../functions.php');
 
-function getValor(){
+function getValor()
+{
   $id = UserID();
   $conection = conection();
   $busca = "SELECT debito FROM cliente WHERE id_cliente='$id'";
@@ -67,6 +68,12 @@ function getValor(){
                 <a href="alugar.php">
                   <i class="fas fa-shopping-basket"></i>
                   <span class="bot-line"></span>Aluguel</a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="fas fa-credit-card"></i>
+                  <span class="bot-line"></span>Pagamento</a>
               </li>
             </ul>
           </div>
@@ -200,7 +207,7 @@ function getValor(){
     <div class="modal fade" id="staticModal" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-        <div class="card">
+          <div class="card">
             <div class="card-header">Cartão de crédito</div>
             <div class="card-body">
               <div class="card-title">
@@ -218,7 +225,7 @@ function getValor(){
                   <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
                 </div>
                 <div class="form-group">
-                  <label for="cc-number" class="control-label mb-1">Numero do cartaõ</label>
+                  <label for="cc-number" class="control-label mb-1">Número do cartão</label>
                   <input id="cc-number" name="cc-number" type="tel" class="form-control cc-number identified visa" value="" data-val="true" data-val-required="Please enter the card number" data-val-cc-number="Please enter a valid card number" autocomplete="cc-number">
                   <span class="help-block" data-valmsg-for="cc-number" data-valmsg-replace="true"></span>
                 </div>
@@ -226,30 +233,30 @@ function getValor(){
                   <div class="col-6">
                     <div class="form-group">
                       <label for="cc-exp" class="control-label mb-1">Validade</label>
-                      <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="MM / YY" autocomplete="cc-exp">
+                      <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="10 / 2020" autocomplete="cc-exp">
                       <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
                     </div>
                   </div>
                   <div class="col-6">
-                    <label for="x_card_code" class="control-label mb-1">CCV</label>
+                    <label for="x_card_code" class="control-label mb-1">CVV</label>
                     <div class="input-group">
                       <input id="x_card_code" name="x_card_code" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code" data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
                     </div>
                   </div>
                 </div>
                 <div>
-                  <button type="button" id="payment-button" name="btnPagar" class="btn btn-lg btn-info btn-block">
+                  <button type="submit" id="payment-button" name="btnPagar" class="btn btn-lg btn-info btn-block">
                     <i class="fa fa-lock fa-lg"></i>&nbsp;
                     <span id="payment-button-amount">Pagar R$ <?php echo getValor(); ?></span>
                     <span id="payment-button-sending" style="display:none;">Sending…</span>
                   </button>
-                  
+
                 </div>
-                
+
               </form>
-              
+
             </div>
-            
+
           </div>
           <button type="button" class="btn btn-danger" style="margin-top: -30px;" data-dismiss="modal">Cancelar</button>
         </div>
@@ -260,7 +267,7 @@ function getValor(){
     <div class="modal fade" id="smallmodal" tabindex="-1" role="dialog" aria-labelledby="smallmodalLabel" aria-hidden="true">
       <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
-          
+
           <div class="modal-footer">
           </div>
         </div>
@@ -298,35 +305,17 @@ function getValor(){
 <!-- end document-->
 <?php
 
-if (isset($_POST['btnCancelar'])) {
+if (isset($_POST['btnPagar'])) {
+  $id = UserID();
   $conection = conection();
-  $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
-  $query = mysqli_query($conection, "UPDATE aluguel SET status = 'Fechado' WHERE id_aluguel = '$inputCodigo'");
-  if ($query) {
+  $result = mysqli_query($conection, "UPDATE cliente as c inner join aluguel as a on a.id_cliente=c.id_cliente SET c.debito=0, a.status='Aberto'  WHERE c.id_cliente='$id';");
+  if ($result) {
     echo "<script language='javascript' type='text/javascript'>
-          alert('Contrato cancelado!');window.location = ('index.php');
+          alert('Pagamento realizado');window.location = ('index.php');
          </script>";
   } else {
-    echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
+    echo "<script language='javascript' type='text/javascript'>alert('Erro no pagamento');</script>";
   }
 }
 
-if (isset($_POST['btnAdiar'])) {
-  $conection = conection();
-  $inputCodigoAdiar = mysqli_real_escape_string($conection, $_POST['inputCodigoAdiar']);
-  $inputDias = mysqli_real_escape_string($conection, $_POST['inputDias']);
-  $busca = "SELECT * FROM aluguel WHERE id_aluguel='$inputCodigoAdiar'";
-  $identificacao = mysqli_query($conection, $busca);
-  $retorno = mysqli_fetch_array($identificacao);
-  $data = $retorno['data_vencimento'];
-  $data   = date('Y-m-d', strtotime($data . " + " . $inputDias . " days"));
-  $result = mysqli_query($conection, "UPDATE aluguel SET data_vencimento='$data', status='Aberto' WHERE id_aluguel='$inputCodigoAdiar'");
-  if ($result) {
-    echo "<script language='javascript' type='text/javascript'>
-          alert('Adiado com sucesso!');window.location = ('index.php');
-         </script>";
-  } else {
-    echo "<script language='javascript' type='text/javascript'>alert('Erro ao adiar');</script>";
-  }
-}
 ?>
