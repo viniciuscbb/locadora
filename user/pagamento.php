@@ -308,7 +308,7 @@ function getValor()
 if (isset($_POST['btnPagar'])) {
   $id = UserID();
   $conection = conection();
-  $result = mysqli_query($conection, "UPDATE cliente as c inner join aluguel as a on a.id_cliente=c.id_cliente SET c.debito=0, a.status='Pago'  WHERE c.id_cliente='$id';");
+  $result = mysqli_query($conection, "UPDATE cliente as c inner join aluguel as a on a.id_cliente=c.id_cliente SET c.debito=0, a.status='Aberto'  WHERE c.id_cliente='$id';");
   if ($result) {
     echo "<script language='javascript' type='text/javascript'>
           alert('Pagamento realizado');window.location = ('index.php');
