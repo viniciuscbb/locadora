@@ -317,6 +317,4 @@ if (isset($_POST['btnPagar'])) {
     echo "<script language='javascript' type='text/javascript'>alert('Erro no pagamento');</script>";
   }
 }
-
-
 ?>
