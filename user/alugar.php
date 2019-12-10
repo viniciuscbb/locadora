@@ -1,10 +1,11 @@
 <?php
 include('../functions.php');
 
-function listaAlugar(){
-    
-  $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from carro");
+function listaAlugar()
+{
+
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT * from carro");
 
     while ($row = mysqli_fetch_array($query)) {
         $ID              = $row['id_carro'];
@@ -17,9 +18,9 @@ function listaAlugar(){
         $direcao         = $row['direcao'];
         $valor           = $row['valor'];
         if ($ar_condicionado == 1) {
-        $ar_condicionado = '<span class="status--process">Sim</span>';
-        }else {
-        $ar_condicionado = '<span class="status--denied">Não</span>';
+            $ar_condicionado = '<span class="status--process">Sim</span>';
+        } else {
+            $ar_condicionado = '<span class="status--denied">Não</span>';
         }
 
         echo '<tr class="tr-shadow">
@@ -33,16 +34,15 @@ function listaAlugar(){
                 <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
                 <td>
                     <div class="table-data-feature">
-                        <button onclick="trocarAlugar('.$ID.')" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
+                        <button onclick="trocarAlugar(' . $ID . ')" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">
                             <i class="fa fa-car"></i>&nbsp;Foto
                         </button>
-                        <button onclick="trocarAlugar('.$ID.')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-success btn-sm" id="btnDelete">
+                        <button onclick="trocarAlugar(' . $ID . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-success btn-sm" id="btnDelete">
                             <i class="fa fa-calendar-check-o"></i>&nbsp;Alugar
                         </button>
                     </div>
                 </td>
             </tr>';
-        
     }
 }
 
@@ -275,7 +275,7 @@ if (isset($_POST['btnAlugar'])) {
                     </div>
                     <div class="modal-body">
                         <div class="has-success form-group">
-                            
+
                             <img src="#" id="imgCarro" alt="CoolAdmin" />
                         </div>
                     </div>
@@ -300,7 +300,7 @@ if (isset($_POST['btnAlugar'])) {
                         <input type="hidden" name="inputModalCancelar" id="inputModalCancelar" class="form-control-success form-control" value="">
                         <div class="form-group">
                             <label>Data de devolução</label>
-                                <input class="au-input au-input--full" type="date" name="data_devolucao" placeholder="">
+                            <input class="au-input au-input--full" type="date" name="data_devolucao" placeholder="">
                         </div>
                         <p>
                             Ao clicar em confirmar você está concordando com os <a href="../termos.html" target="_blank">termos e condições</a>.

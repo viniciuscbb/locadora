@@ -327,7 +327,7 @@ if (isset($_POST['btnAdiar'])) {
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
     $data = $retorno['data_vencimento'];
-    $data   = date('Y-m-d', strtotime($data. " + ".$inputDias." days"));
+    $data   = date('Y-m-d', strtotime($data . " + " . $inputDias . " days"));
     $result = mysqli_query($conection, "UPDATE aluguel SET data_vencimento='$data', status='Aberto' WHERE id_aluguel='$inputCodigoAdiar'");
     if ($result) {
         echo "<script language='javascript' type='text/javascript'>

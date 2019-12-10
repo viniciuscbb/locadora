@@ -211,4 +211,3 @@ function getNascimento()
   $retorno = mysqli_fetch_array($identificacao);
   return date("d/m/Y", strtotime($retorno['data_nascimento']));
 }
-?>
