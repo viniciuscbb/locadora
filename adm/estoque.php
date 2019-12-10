@@ -59,7 +59,7 @@ function mostraEstoque(){
 
         echo '<tr>
                 <td>'.$modelo.'</td>
-                <td>'.number_format($motor, 1,).'</td>
+                <td>'.number_format($motor, 1).'</td>
                 <td>'.$cambio .'</td>
                 <td>'.$ar_condicionado.'</td>
                 <td>'.$passageiros.'</td>
