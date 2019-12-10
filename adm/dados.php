@@ -550,29 +550,46 @@ function getDebito()
             </section>
             <section class="p-t-20">
                 <div class="container">
-
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="title-5 m-b-35">Tabela de contratos</h3>
-
-                            <div class="table-responsive table-responsive-data2">
-                                <table class="table table-data2">
-                                    <thead>
-                                        <tr>
-                                            <th>Cliente</th>
-                                            <th>Modelo</th>
-                                            <th>data inicial</th>
-                                            <th>valor</th>
-                                            <th>status</th>
-                                            <th>multa</th>
-                                            <th>Dias restantes</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php echo listaAdm(); ?>
-                                    </tbody>
-                                </table>
+                            <div class="col-lg-6">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <strong>Dados do cliente</strong>
+                                    </div>
+                                    <div class="card-body card-block">
+                                        <div class="form-group">
+                                            <label for="company" class=" form-control-label">Nome</label>
+                                            <input type="text" id="company" placeholder="" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="vat" class=" form-control-label">Endereço</label>
+                                            <input type="text" id="vat" placeholder="" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="street" class=" form-control-label">CPF</label>
+                                            <input type="text" id="street" placeholder="" class="form-control">
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="city" class=" form-control-label">Data de nascimento</label>
+                                                    <input type="text" id="city" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="form-group">
+                                                    <label for="postal-code" class=" form-control-label">Email</label>
+                                                    <input type="text" id="postal-code" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="country" class=" form-control-label">Débito</label>
+                                            <input type="text" id="country" placeholder="" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -697,10 +714,10 @@ function getUserName2()
 {
     echo getUserID();
     $conection = conection();
-    /*$busca = "SELECT nome FROM cliente WHERE id_cliente='$id_cliente'";
+    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id_cliente'";
     $identificacao = mysqli_query($conection, $busca);
     $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];*/
+    return $retorno['nome'];
 }
 
 ?>
