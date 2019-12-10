@@ -1,89 +1,58 @@
 <?php
 include('../functions.php');
 
-function calcDiasRestantes($dataInicial, $dataFinal)
+function getNomeDados()
 {
-    $time_inicial = strtotime($dataInicial);
-    $time_final = strtotime($dataFinal);
-    $diferenca = $time_final - $time_inicial;
-    $dias = (int) floor($diferenca / (60 * 60 * 24));
-    $diasRestantes   = $dias;
-    if ($diasRestantes < 1) {
-        $dias = 0;
-    }
-    return $dias;
-}
-
-function getNome($id_cliente)
-{
+    $id_cliente = htmlspecialchars($_GET["id"]);
     $conection = conection();
     $query = mysqli_query($conection, "SELECT nome from cliente where id_cliente = '$id_cliente'");
     $retorno = mysqli_fetch_array($query);
     return $retorno['nome'];
 }
 
-function getModelo($id_carro)
+function getEnderecoDados()
 {
+    $id_cliente = htmlspecialchars($_GET["id"]);
     $conection = conection();
-    $query = mysqli_query($conection, "SELECT modelo from carro where id_carro = '$id_carro'");
+    $query = mysqli_query($conection, "SELECT endereco from cliente where id_cliente = '$id_cliente'");
     $retorno = mysqli_fetch_array($query);
-    return $retorno['modelo'];
+    return $retorno['endereco'];
 }
 
-function listaAdm()
+function getCPFDados()
 {
-
+    $id_cliente = htmlspecialchars($_GET["id"]);
     $conection = conection();
-    $query = mysqli_query($conection, "SELECT * from aluguel order by status");
+    $query = mysqli_query($conection, "SELECT cpf from cliente where id_cliente = '$id_cliente'");
+    $retorno = mysqli_fetch_array($query);
+    return $retorno['cpf'];
+}
 
-    while ($row = mysqli_fetch_array($query)) {
-        $id_aluguel      = $row['id_aluguel'];
-        $id_cliente      = $row['id_cliente'];
-        $id_carro        = $row['id_carro'];
-        $data_aluguel    = $row['data_aluguel'];
-        $valor           = $row['valor'];
-        $status          = $row['status'];
-        $multa           = $row['multa'];
-        $data_vencimento = $row['data_vencimento'];
+function getDataDados()
+{
+    $id_cliente = htmlspecialchars($_GET["id"]);
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT data_nascimento from cliente where id_cliente = '$id_cliente'");
+    $retorno = mysqli_fetch_array($query);
+    return date("d/m/Y", strtotime($retorno['data_nascimento']));
+}
 
-        $nome = getNome($id_cliente);
-        $modelo = getModelo($id_carro);
+function getEmailDados()
+{
+    $id_cliente = htmlspecialchars($_GET["id"]);
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT email from cliente where id_cliente = '$id_cliente'");
+    $retorno = mysqli_fetch_array($query);
+    return $retorno['email'];
+}
 
-        if ($status == "Vencido") {
-            $status = '<span class="status--denied">Vencido</span>';
-        } else if ($status == "Aberto") {
-            $status = '<span class="status--process">Aberto</span>';
-        } else {
-            $status = '<span class="status--denied">Fechado</span>';
-        }
-        echo '<tr class="tr-shadow">
-                <td>' . $nome . '</td>
-                <td>' . $modelo . '</td>
-                <td class="desc">' . date("d/m/Y", strtotime($data_aluguel)) . '</td>
-                <td>R$ ' . number_format($valor, 2, ',', '.') . ' / dia</td>
-                <td>' . $status . '</td>
-                <td>R$ ' . number_format($multa, 2, ',', '.') . '</td>
-                <td>' . calcDiasRestantes($data_aluguel, $data_vencimento) . '</td>
-                <td>';
-        if ($status == '<span class="status--denied">Fechado</span>') {
-            echo '<div class="table-data-feature">
-                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
-                                <i class="fa fa-clock-o"></i>&nbsp;Dados
-                            </button>
-                        </div>';
-        } else {
-            echo '<div class="table-data-feature">
-                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
-                                <i class="fa fa-clock-o"></i>&nbsp;Dados
-                            </button>
-                            <button onclick="trocar(' . $id_aluguel . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
-                                <i class="fa fa-times-circle"></i>&nbsp;Cancelar
-                            </button>
-                        </div>';
-        }
-        echo '</td>
-            </tr>';
-    }
+function getDebitoDados()
+{
+    $id_cliente = htmlspecialchars($_GET["id"]);
+    $conection = conection();
+    $query = mysqli_query($conection, "SELECT debito from cliente where id_cliente = '$id_cliente'");
+    $retorno = mysqli_fetch_array($query);
+    return number_format($retorno['debito'], 2, ',', '.');
 }
 
 function graficoMes()
@@ -301,20 +270,6 @@ function graficoMes()
     ";
 }
 
-if (isset($_POST['btnCancelar'])) {
-    $conection = conection();
-    $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
-    $query = mysqli_query($conection, "UPDATE aluguel SET status = 'Fechado' WHERE id_aluguel = '$inputCodigo'");
-    if ($query) {
-        echo "<script language='javascript' type='text/javascript'>
-          alert('Contrato cancelado!');window.location = ('index.php');
-         </script>";
-    } else {
-        echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
-    }
-}
-
-
 ?>
 
 <!DOCTYPE html>
@@ -369,7 +324,7 @@ if (isset($_POST['btnCancelar'])) {
                     <div class="header__navbar">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="#">
+                                <a href="index.php">
                                     <i class="fas fa-tachometer-alt"></i>Painel
                                     <span class="bot-line"></span>
                                 </a>
@@ -501,7 +456,7 @@ if (isset($_POST['btnCancelar'])) {
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="col-lg-6">
+                            <div class="col-lg-6" style="margin-left: 25%;">
                                 <div class="card">
                                     <div class="card-header">
                                         <strong>Dados do cliente</strong>
@@ -509,33 +464,33 @@ if (isset($_POST['btnCancelar'])) {
                                     <div class="card-body card-block">
                                         <div class="form-group">
                                             <label for="company" class=" form-control-label">Nome</label>
-                                            <input type="text" id="company" placeholder="" class="form-control">
+                                            <input type="text" id="company" placeholder="" class="form-control" value=<?php echo getNomeDados(); ?>>
                                         </div>
                                         <div class="form-group">
                                             <label for="vat" class=" form-control-label">Endereço</label>
-                                            <input type="text" id="vat" placeholder="" class="form-control">
+                                            <input type="text" id="vat" placeholder="" class="form-control" value=<?php echo getEnderecoDados(); ?>>
                                         </div>
                                         <div class="form-group">
                                             <label for="street" class=" form-control-label">CPF</label>
-                                            <input type="text" id="street" placeholder="" class="form-control">
+                                            <input type="text" id="street" placeholder="" class="form-control" value=<?php echo getCPFDados(); ?>>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label for="city" class=" form-control-label">Data de nascimento</label>
-                                                    <input type="text" id="city" placeholder="" class="form-control">
+                                                    <input type="text" id="city" placeholder="" class="form-control" value=<?php echo getDataDados(); ?>>
                                                 </div>
                                             </div>
                                             <div class="col-8">
                                                 <div class="form-group">
                                                     <label for="postal-code" class=" form-control-label">Email</label>
-                                                    <input type="text" id="postal-code" placeholder="" class="form-control">
+                                                    <input type="text" id="postal-code" placeholder="" class="form-control" value=<?php echo getEmailDados(); ?>>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="country" class=" form-control-label">Débito</label>
-                                            <input type="text" id="country" placeholder="" class="form-control">
+                                            <input type="text" id="country" placeholder="" class="form-control" value=<?php echo getDebitoDados(); ?>>
                                         </div>
                                     </div>
                                 </div>
@@ -578,7 +533,7 @@ if (isset($_POST['btnCancelar'])) {
                         <div class="has-success form-group">
                             <input type="hidden" name="inputDados" id="inputModal" class="form-control-success form-control" value="">
                             <label for="inputSuccess2i" class=" form-control-label">Nome</label>
-                            <input type="text" id="inputNome" class="form-control-success form-control" value="<?php echo getUserName2(); ?>" disabled>
+                            <input type="text" id="inputNome" class="form-control-success form-control" value="<?php ?>" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
                             <input type="email" id="inputEmail" class="form-control-success form-control" value="fernando2019@hotmail.com" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">Endereço</label>
@@ -651,22 +606,3 @@ if (isset($_POST['btnCancelar'])) {
 
 </html>
 <!-- end document-->
-<?php
-
-function getUserID()
-{
-    $conection = conection();
-    return mysqli_real_escape_string($conection, $_POST['inputDados']);
-}
-
-function getUserName2()
-{
-    echo getUserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id_cliente'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-?>

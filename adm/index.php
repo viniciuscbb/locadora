@@ -67,15 +67,17 @@ function listaAdm()
                 <td>';
         if ($status == '<span class="status--denied">Fechado</span>') {
             echo '<div class="table-data-feature">
-                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+                            <a href="dados.php?id='.$id_cliente.'">
+                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
                                 <i class="fa fa-clock-o"></i>&nbsp;Dados
-                            </button>
+                            </button></a>
                         </div>';
         } else {
             echo '<div class="table-data-feature">
-                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" data-toggle="modal" data-target="#staticModal" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
+                            <a href="dados.php?id='.$id_cliente.'">
+                            <button onclick="trocar(' . $id_cliente . ')" name="btnModal" type="button" class="btn btn-success btn-sm" id="btnModal" value=<?php echo $ID; ?>
                                 <i class="fa fa-clock-o"></i>&nbsp;Dados
-                            </button>
+                            </button></a>
                             <button onclick="trocar(' . $id_aluguel . ')" name="btnDelete" type="button" data-toggle="modal" data-target="#smallmodal" class="btn btn-danger btn-sm" id="btnDelete" value=<?php echo $ID; ?>
                                 <i class="fa fa-times-circle"></i>&nbsp;Cancelar
                             </button>
@@ -696,25 +698,3 @@ function getDebito()
 
 </html>
 <!-- end document-->
-<?php
-
-<<<<<<< HEAD
-function getUserID()
-{
-    $conection = conection();
-    return mysqli_real_escape_string($conection, $_POST['inputDados']);
-}
-
-function getUserName2()
-{
-    echo getUserID();
-    $conection = conection();
-    /*$busca = "SELECT nome FROM cliente WHERE id_cliente='$id_cliente'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];*/
-}
-=======
->>>>>>> db24eb83a08dc32d75d761326666281d46339473
-
-?>
