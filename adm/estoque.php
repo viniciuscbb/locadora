@@ -26,8 +26,10 @@ function status($id_carro)
 {
     $conection = conection();
     $query = mysqli_query($conection, "SELECT * FROM aluguel WHERE id_carro = '$id_carro'");
+    $retorno = mysqli_fetch_array($query);
+    $status = $retorno['status'];
     $resultado = mysqli_num_rows($query);
-    if ($resultado >= 1) {
+    if ($resultado >= 1 && $status != "Fechado") {
         $status = "<td class='denied'>Alugado</td>";
     } else {
         $status = "<td class='process'>Disponível</td>";
