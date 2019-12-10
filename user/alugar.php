@@ -6,7 +6,7 @@ function listaAlugar()
 
     $conection = conection();
     $query = mysqli_query($conection, "SELECT * from carro");
-
+    
     while ($row = mysqli_fetch_array($query)) {
         $ID              = $row['id_carro'];
         $modelo          = $row['modelo'];
@@ -22,7 +22,6 @@ function listaAlugar()
         } else {
             $ar_condicionado = '<span class="status--denied">Não</span>';
         }
-
         echo '<tr class="tr-shadow">
                 <td>'.$modelo.'</td>
                 <td>'.number_format($motor, 1).'</td>

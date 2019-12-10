@@ -15,6 +15,7 @@ function conection()
 
 function calcDias($dataFinal)
 {
+  date_default_timezone_set('America/Sao_Paulo');
   $dataInicial = date('Y-m-d');
   $time_inicial = strtotime($dataInicial);
   $time_final = strtotime($dataFinal);
@@ -27,10 +28,11 @@ function calcDias($dataFinal)
   return $dias;
 }
 
-function calcMulta($dataFinal, $valor, $id)
+function calcMulta($dataFinal, $valor, $id, $status)
 {
   $conection = conection();
-  if (calcDias($dataFinal) < 1) {
+  if (calcDias($dataFinal) < 1 && $status == '<span class="status--denied">Vencido</span>') {
+    date_default_timezone_set('America/Sao_Paulo');
     $dataInicial = date('Y-m-d');
     $time_inicial = strtotime($dataInicial);
     $time_final = strtotime($dataFinal);
@@ -52,14 +54,14 @@ function getDebito()
 {
   $id = UserID();
   $conection = conection();
-  $query = mysqli_query($conection, "SELECT TIMESTAMPDIFF(DAY, data_aluguel, data_vencimento) as total, valor from aluguel where id_cliente = '$id'");
+  $query = mysqli_query($conection, "SELECT TIMESTAMPDIFF(DAY, data_aluguel, data_vencimento) as total, valor from aluguel where id_cliente = '$id' and not status = 'Pago'");
   $calculo = 0;
   while ($row = mysqli_fetch_array($query)) {
     $dias = $row['total'];
     $valor = $row['valor'];
     $calculo = $calculo + $dias * $valor;
   }
-  
+
   $busca = "SELECT sum(multa) as multa FROM aluguel WHERE id_cliente='$id' and status = 'Vencido'";
   $identificacao = mysqli_query($conection, $busca);
   $retorno = mysqli_fetch_array($identificacao);
@@ -67,7 +69,7 @@ function getDebito()
   $resultado = $calculo + $multa;
 
   $busca = "UPDATE cliente SET debito = '$resultado' where id_cliente = '$id'";
-    if (mysqli_query($conection, $busca)) { }
+  if (mysqli_query($conection, $busca)) { }
 
   $result = number_format($resultado, 2, ',', '.');
   return $result;
@@ -76,7 +78,7 @@ function getDebito()
 function mostraListaAluguel($ID)
 {
   $conection = conection();
-  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID'");
+  $query = mysqli_query($conection, "SELECT * from aluguel as a inner join carro c on a.id_carro = c.id_carro where a.id_cliente = '$ID' order by status");
 
   while ($row = mysqli_fetch_array($query)) {
     $ID          = $row['id_aluguel'];
@@ -89,8 +91,10 @@ function mostraListaAluguel($ID)
       $status = '<span class="status--denied">Vencido</span>';
     } else if ($status == "Aberto") {
       $status = '<span class="status--process">Aberto</span>';
-    }else {
+    } else  if ($status == "Fechado") {
       $status = '<span class="status--denied">Fechado</span>';
+    } else {
+      $status = '<span class="status--process">Pago</span>';
     }
     /*if (calcDias($dataFinal) > 0) {
       $status = '<span class="status--process">Aberto</span>';
@@ -103,7 +107,7 @@ function mostraListaAluguel($ID)
             <td>' . date("d/m/Y", strtotime($dataFinal)) . '</td>
             <td>R$ ' . number_format($valor, 2, ',', '.') . '</td>
             <td>' . $status . '</td>
-            <td>R$ ' . number_format(calcMulta($dataFinal, $valor, $ID), 2, ',', '.') . '</td>
+            <td>R$ ' . number_format(calcMulta($dataFinal, $valor, $ID, $status), 2, ',', '.') . '</td>
             <td>' . calcDias($dataFinal) . '</td>
             <td>';
     if (calcDias($dataFinal) > 0 && $status == '<span class="status--process">Aberto</span>') {
@@ -177,7 +181,7 @@ function administrador($id)
   $busca = "SELECT * FROM adm WHERE id_cliente='$id'";
   $identificacao = mysqli_query($conection, $busca);
   $resultado = mysqli_num_rows($identificacao);
-  if($resultado >= 1 ){
+  if ($resultado >= 1) {
     header("location: ../adm/index.php");
   }
 }
