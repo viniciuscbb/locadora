@@ -51,11 +51,13 @@ function listaAdm()
 
         if ($status == "Vencido") {
             $status = '<span class="status--denied">Vencido</span>';
-        } else if ($status == "Aberto") {
+          } else if ($status == "Aberto") {
             $status = '<span class="status--process">Aberto</span>';
-        } else {
+          } else  if ($status == "Fechado") {
             $status = '<span class="status--denied">Fechado</span>';
-        }
+          } else {
+            $status = '<span class="status--process">Pago</span>';
+          }
         echo '<tr class="tr-shadow">
                 <td>' . $nome . '</td>
                 <td>' . $modelo . '</td>

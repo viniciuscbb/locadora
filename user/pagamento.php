@@ -58,7 +58,7 @@ function getValor()
           <div class="header__navbar">
             <ul class="list-unstyled">
               <li class="has-sub">
-                <a href="#">
+                <a href="index.php">
                   <i class="fas fa-tachometer-alt"></i>Painel
                   <span class="bot-line"></span>
                 </a>
@@ -317,5 +317,6 @@ if (isset($_POST['btnPagar'])) {
     echo "<script language='javascript' type='text/javascript'>alert('Erro no pagamento');</script>";
   }
 }
+
 
 ?>
