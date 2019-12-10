@@ -72,6 +72,11 @@ button {
     background: none;
 }
 
+body{
+  background-color: #dddddd;
+
+}
+
 img {
     max-width: 100%;
     height: auto;
@@ -278,6 +283,11 @@ section {
     background: #e5e5e5;
     
 }
+.page-wrapper2 {
+    overflow: hidden;
+    background: #e5e5e5;
+    padding-bottom: 8vh;
+}
 
 @media (max-width: 991px) {
     .page-wrapper {
@@ -333,7 +343,7 @@ section {
 
 .page-content--bge5 {
     background: #e5e5e5;
-    height: 100vh;
+    
 }
 
 .login-wrap {

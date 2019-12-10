@@ -57,7 +57,7 @@ if (isset($_POST['btnRegistrar'])) {
 </head>
 
 <body class="animsition">
-    <div class="page-wrapper">
+    <div class="page-wrapper2">
         <div class="page-content--bge5">
             <div class="container">
                 <div class="login-wrap">
@@ -83,7 +83,7 @@ if (isset($_POST['btnRegistrar'])) {
                                 </div>
                                 <div class="form-group">
                                     <label>CPF</label>
-                                    <input class="au-input au-input--full" type="number" name="cpf" placeholder="Somente números">
+                                    <input class="au-input au-input--full" type="text" name="cpf" placeholder="Somente números">
                                 </div>
                                 <div class="form-group">
                                     <label>Data de nascimento</label>

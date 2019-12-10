@@ -2,7 +2,6 @@
 include('../functions.php');
 
 if (isset($_POST['btnAdicionar'])) {
-    include('../functions.php');
     $conection = conection();
     $modelo = mysqli_real_escape_string($conection, $_POST['modelo']);
     $motor = mysqli_real_escape_string($conection, $_POST['motor']);
@@ -304,7 +303,6 @@ function mostraEstoque()
                                 <select name="direcao" id="inputNome" class="form-control">
                                     <option>Selecione uma opção</option>
                                     <option>Hidráulica</option>
-                                    <option>Eletro-hidráulica</option>
                                     <option>Elétrica</option>
                                 </select>
                                 <label for="inputSuccess2i" class=" form-control-label">Valor</label>
