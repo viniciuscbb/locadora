@@ -315,57 +315,6 @@ if (isset($_POST['btnCancelar'])) {
 }
 
 
-
-/*function getEndereco()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getCPF()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getNascimento()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getEmail()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}
-
-function getDebito()
-{
-    $id = UserID();
-    $conection = conection();
-    $busca = "SELECT nome FROM cliente WHERE id_cliente='$id'";
-    $identificacao = mysqli_query($conection, $busca);
-    $retorno = mysqli_fetch_array($identificacao);
-    return $retorno['nome'];
-}*/
-
 ?>
 
 <!DOCTYPE html>
