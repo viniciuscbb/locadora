@@ -305,16 +305,16 @@ function getValor()
 <!-- end document-->
 <?php
 
-if (isset($_POST['btnCancelar'])) {
+if (isset($_POST['btnPagar'])) {
+  $id = UserID();
   $conection = conection();
-  $inputCodigo = mysqli_real_escape_string($conection, $_POST['inputCodigo']);
-  $query = mysqli_query($conection, "UPDATE aluguel SET status = 'Fechado' WHERE id_aluguel = '$inputCodigo'");
-  if ($query) {
+  $result = mysqli_query($conection, "UPDATE cliente as c inner join aluguel as a on a.id_cliente=c.id_cliente SET c.debito=0, a.status='Aberto'  WHERE c.id_cliente='$id';");
+  if ($result) {
     echo "<script language='javascript' type='text/javascript'>
-          alert('Contrato cancelado!');window.location = ('index.php');
+          alert('Pagamento realizado');window.location = ('index.php');
          </script>";
   } else {
-    echo "<script language='javascript' type='text/javascript'>alert('Erro ao cancelar');</script>";
+    echo "<script language='javascript' type='text/javascript'>alert('Erro no pagamento');</script>";
   }
 }
 
