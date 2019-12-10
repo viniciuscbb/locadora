@@ -61,6 +61,12 @@ administrador(UserID());
                                     <i class="fas fa-shopping-basket"></i>
                                     <span class="bot-line"></span>Aluguel</a>
                             </li>
+                            
+                            <li>
+                                <a href="pagamento.php">
+                                    <i class="fas fa-credit-card"></i>
+                                    <span class="bot-line"></span>Pagamento</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="header__tool">
