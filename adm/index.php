@@ -315,6 +315,17 @@ if (isset($_POST['btnCancelar'])) {
 }
 
 
+function getUserID()
+{
+    $conection = conection();
+    return mysqli_real_escape_string($conection, $_POST['inputDados']);
+}
+
+function getUserName2()
+{
+    return getUserID();
+    
+}
 
 /*function getEndereco()
 {
@@ -612,7 +623,7 @@ function getDebito()
                         <div class="has-success form-group">
                             <input type="hidden" name="inputDados" id="inputModal" class="form-control-success form-control" value="">
                             <label for="inputSuccess2i" class=" form-control-label">Nome</label>
-                            <input type="text" id="inputNome" class="form-control-success form-control" value="<?php echo getUserName2(); ?>" disabled>
+                            <input type="text" id="inputNome" class="form-control-success form-control" value="<?php echo getUserName2(); ?>" >
                             <label for="inputSuccess2i" class=" form-control-label">E-mail</label>
                             <input type="email" id="inputEmail" class="form-control-success form-control" value="fernando2019@hotmail.com" disabled>
                             <label for="inputSuccess2i" class=" form-control-label">Endereço</label>
@@ -687,6 +698,7 @@ function getDebito()
 <!-- end document-->
 <?php
 
+<<<<<<< HEAD
 function getUserID()
 {
     $conection = conection();
@@ -702,5 +714,7 @@ function getUserName2()
     $retorno = mysqli_fetch_array($identificacao);
     return $retorno['nome'];*/
 }
+=======
+>>>>>>> db24eb83a08dc32d75d761326666281d46339473
 
 ?>

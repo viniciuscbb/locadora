@@ -24,14 +24,14 @@ function listaAlugar()
         }
 
         echo '<tr class="tr-shadow">
-                <td>' . $modelo . '</td>
-                <td>' . number_format($motor, 1) . '</td>
-                <td class="desc">' . $cambio . '</td>
-                <td>' . $ar_condicionado . '</td>
-                <td>' . $passageiros . '</td>
-                <td>' . $portas . '</td>
-                <td><span class="block-email">' . $direcao . '</span></td>
-                <td>R$ ' . number_format($valor, 2, ',', '.') . ' / dia</td>
+                <td>'.$modelo.'</td>
+                <td>'.number_format($motor, 1).'</td>
+                <td class="desc">'.$cambio .'</td>
+                <td>'.$ar_condicionado.'</td>
+                <td>'.$passageiros.'</td>
+                <td>'.$portas.'</td>
+                <td><span class="block-email">'.$direcao.'</span></td>
+                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
                 <td>
                     <div class="table-data-feature">
                         <button onclick="trocarAlugar(' . $ID . ')" name="btnModal" type="button" data-toggle="modal" data-target="#largeModal" class="btn btn-primary btn-sm" id="btnModal">

@@ -60,15 +60,15 @@ function mostraEstoque()
         $status = status($id_carro);
 
         echo '<tr>
-                <td>' . $modelo . '</td>
-                <td>' . number_format($motor, 1) . '</td>   
-                <td>' . $cambio . '</td>
-                <td>' . $ar_condicionado . '</td>
-                <td>' . $passageiros . '</td>
-                <td>' . $portas . '</td>
-                <td>' . $direcao . '</td>
-                <td>R$ ' . number_format($valor, 2, ',', '.') . ' / dia</td>
-                ' . $status . '
+                <td>'.$modelo.'</td>
+                <td>'.number_format($motor, 1).'</td>
+                <td>'.$cambio .'</td>
+                <td>'.$ar_condicionado.'</td>
+                <td>'.$passageiros.'</td>
+                <td>'.$portas.'</td>
+                <td>'.$direcao.'</td>
+                <td>R$ '.number_format($valor, 2, ',', '.').' / dia</td>
+                '.$status.'
             </tr>';
     }
 }
